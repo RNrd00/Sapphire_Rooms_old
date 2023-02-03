@@ -1,0 +1,17 @@
+<div class="container jQuery_aplly">
+    <h3>ユーザー情報</h3>
+    <div class="row">
+        <div class="col-sm-12 mx-auto">
+            <p>ユーザーアイコン</p><%= image_tag @customer.get_profile_image, size: '300x300' %>
+            <p>ユーザーID: <%= @customer.id %></p>
+            <p>名前:　<%= @customer.name %></p>
+        </div>
+    </div>
+    <h4>自己紹介</h4>
+    <div class="row">
+        <div class="col-sm-12 mx-auto">
+            <p><%= @customer.introduce %></p>
+            <%= link_to '編集する', edit_public_customer_path(current_customer), method: :get, class:'btn btn-success' %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+    <%= render 'public/books/index', book: @book %>
+    <div class="row">
+        <div class="col-sm-6">
+        <% if @book.customer == current_customer %>
+            <%= form_with model: @book, method: :delete, url: public_book_path(@book) do %>
+                <br>
+                <%= text_field_tag :key, @word, placeholder: '削除パスワード(1~100の文字か数字)', class:'w-50' %><br>
+                <br>
+                <%= submit_tag '投稿を削除する', data: {confirm: "本当に削除しますか？"} %>
+                <br>
+            <% end %>
+        <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="text-success"><%= flash[:notice] %></h4><br><br>
+        </div>
+    </div>
+</div>

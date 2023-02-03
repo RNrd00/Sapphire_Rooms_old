@@ -1,0 +1,43 @@
+<div class="container jQuery_aplly">
+    <div class="row">
+        <h1>フリー投稿画面</h1>
+    </div>
+    <div class="row">
+        <p>ここでは自由にお話する事が出来ます。</p>
+        <p>フリートークとしてお使いください。</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+        <h1><i class="fas fa-exclamation-triangle"></i><strong>注意事項</strong></h1>
+        <br>
+        <ul>
+            <h3><li>中傷発言はお止めください</li></h3><br>
+            <h3><li>公序良俗に反する発言は厳禁です</li></h3><br>
+            <h3><li>適切なモラルを遵守した投稿をお願い致します</li></h3>
+        </ul>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>フリートーク</h1>
+            <%= flash[:notice] %><br><br>
+        </div>
+    </div>
+    <% if @customer.name != "guestuser" %>
+    <div class="row">
+        <div class="col-sm-12">
+            <%= render 'public/books/form', book: @book %>
+        </div>
+    </div>
+    <% end %>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>コメント欄</h1>
+            <% @books.each do |books| %>
+                <%= render 'public/books/index', book: books %>
+            <% end %>
+        </div>
+    </div>
+</div>

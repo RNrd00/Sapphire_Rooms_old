@@ -1,5 +1,25 @@
 <div class="container">
-    <%= render 'public/books/index', book: @book %>
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="border border-success">
+        <br>
+        <div class="d-flex justify-content-around">
+            <div class="border border-5 border-dark">ユーザー名:<%= @book.name %></div>
+            <div class="border border-5 border-dark">投稿者のID:<%= @book.customer_id %></div>
+        </div>
+        <br>
+        <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
+            <%= safe_join(@book.introduce.split("\n"),tag(:br)) %>
+        </div>
+        <div class=<%= "favorite-" + @book.id.to_s %> >
+            <%= render 'public/favorites/btn', book: @book %>
+        </div> 
+        <% if !current_page?(public_book_path(@book.id)) %>
+            <%= link_to "コメント詳細ページ", public_book_path(@book.id), method: :get, class:'btn btn-success' %>
+        <% end %>
+        </div>
+    </div>
+</div>
     <div class="row">
         <div class="col-sm-6">
         <% if @book.customer == current_customer %>

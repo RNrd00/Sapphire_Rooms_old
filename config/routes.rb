@@ -6,8 +6,18 @@ devise_for :customers,skip: [:passwords], controllers: {
 
   namespace :public do
     get "home/about" => "homes#about"
-    resources :books, only:[:index, :edit, :show, :create, :destroy, :update]
-    resources :customers, only:[:index, :edit, :show, :update]
+    resources :books, only:[:index, :edit, :show, :create, :destroy, :update] do
+      resource :favorites, only: [:create, :destroy]
+    end
+    resources :customers, only:[:index, :edit, :show, :update] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+      member do
+        get :likes
+      end
+    end
+    get '/search', to: 'searches#search'
   end
   
   scope module: :public do

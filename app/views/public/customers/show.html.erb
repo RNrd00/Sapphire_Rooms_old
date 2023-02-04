@@ -5,6 +5,8 @@
             <p>ユーザーアイコン</p><%= image_tag @customer.get_profile_image, size: '300x300' %>
             <p>ユーザーID: <%= @customer.id %></p>
             <p>名前:　<%= @customer.name %></p>
+            <p>フォロー数:　<%= link_to @customer.followings.count, public_customer_followings_path(@customer) %></p>
+            <p>フォロワー数:　<%= link_to @customer.followers.count, public_customer_followers_path(@customer) %></p>
         </div>
     </div>
     <h4>自己紹介</h4>
@@ -14,4 +16,5 @@
             <%= link_to '編集する', edit_public_customer_path(current_customer), method: :get, class:'btn btn-success' %>
         </div>
     </div>
+    <%= link_to "ブックマーク一覧", likes_public_customer_path(@customer), method: :get, class:'btn btn-success' %>
 </div>

@@ -1,7 +1,10 @@
 class Public::CustomersController < ApplicationController
+    before_action :authenticate_customer!
     before_action :ensure_guest_customer, only: [:edit]
+    before_action :set_customer, only: [:likes]
     
     def index
+        @customer = Customer.all
     end
     
     def show
@@ -19,10 +22,19 @@ class Public::CustomersController < ApplicationController
         redirect_to public_customer_path(current_customer)
     end
     
+    def likes
+        likes = Favorite.where(customer_id: @customer.id).pluck(:book_id)
+        @like_books = Book.find(likes)
+    end
+    
     private
     
     def customer_params
         params.require(:customer).permit(:name, :introduce, :profile_image)
+    end
+    
+    def set_customer
+        @customer = Customer.find(params[:id])
     end
     
     def ensure_guest_customer

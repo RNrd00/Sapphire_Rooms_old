@@ -1,0 +1,20 @@
+<table class="table table-secondary table-striped">
+    <thead>
+        <tr>
+            <th>画像</th>
+            <th>ユーザーID</th>
+            <th>名前</th>
+            <th>フォロー</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% customer.each do |customer| %>
+        <tr>
+            <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
+            <td><%= customer.id %></td>
+            <td><%= customer.name %></td>
+            <td><%= render 'public/relationships/btn', customer: customer %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

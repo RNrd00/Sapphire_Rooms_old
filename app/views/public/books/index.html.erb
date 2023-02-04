@@ -35,9 +35,7 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>コメント欄</h1>
-            <% @books.each do |books| %>
-                <%= render 'public/books/index', book: books %>
-            <% end %>
+                <%= render 'public/books/index', books: @books %>
         </div>
     </div>
 </div>

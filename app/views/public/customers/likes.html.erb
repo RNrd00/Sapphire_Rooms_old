@@ -1,7 +1,11 @@
-<div class="row">
+<div class="container">
+    <h1>いいね一覧</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
     <div class="col-sm-12">
     <div class="border border-success">
-        <% books.each do |book| %>
+        <% @like_books.each do |book| %>
         <br>
         <div class="d-flex justify-content-around">
             <div class="border border-5 border-dark">ユーザー名:<%= book.name %></div>
@@ -19,5 +23,8 @@
         <% end %>
         </div>
         <% end %>
+    </div>
+</div>
+        </div>
     </div>
 </div>

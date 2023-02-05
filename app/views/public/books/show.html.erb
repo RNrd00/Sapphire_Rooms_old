@@ -38,4 +38,10 @@
             <h4 class="text-success"><%= flash[:notice] %></h4><br><br>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <%= render 'public/book_comments/index', book: @book %>
+            <%= render 'public/book_comments/form', book: @book, book_comment: @book_comment %>
+        </div>
+    </div>
 </div>

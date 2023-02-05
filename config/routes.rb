@@ -7,6 +7,7 @@ devise_for :customers,skip: [:passwords], controllers: {
   namespace :public do
     get "home/about" => "homes#about"
     resources :books, only:[:index, :edit, :show, :create, :destroy, :update] do
+      resources :book_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
     resources :customers, only:[:index, :edit, :show, :update] do

@@ -1,4 +1,5 @@
 class Public::BooksController < ApplicationController
+    before_action :authenticate_customer!
     
     def index
         @book = Book.new
@@ -41,6 +42,8 @@ class Public::BooksController < ApplicationController
       redirect_referer
     end
   end
+  
+  private
   
   def book_params
     params.require(:book).permit(:name, :introduce, :delete_key)

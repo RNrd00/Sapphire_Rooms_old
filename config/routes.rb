@@ -6,6 +6,7 @@ devise_for :customers,skip: [:passwords], controllers: {
 
   namespace :public do
     get "home/about" => "homes#about"
+    get '/search', to: 'searches#search'
     resources :books, only:[:index, :edit, :show, :create, :destroy, :update] do
       resources :book_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
@@ -18,7 +19,6 @@ devise_for :customers,skip: [:passwords], controllers: {
         get :likes
       end
     end
-    get '/search', to: 'searches#search'
   end
   
   scope module: :public do

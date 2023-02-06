@@ -13,7 +13,10 @@
         </div>
         <div class=<%= "favorite-" + @book.id.to_s %> >
             <%= render 'public/favorites/btn', book: @book %>
-        </div> 
+        </div>
+        <div class="book-comments-counter">
+            <%= render "public/book_comments/counter", book: @book %>
+        </div>
         <% if !current_page?(public_book_path(@book.id)) %>
             <%= link_to "コメント詳細ページ", public_book_path(@book.id), method: :get, class:'btn btn-success' %>
         <% end %>
@@ -40,8 +43,12 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <%= render 'public/book_comments/index', book: @book %>
+            <div class="book-comments-index">
+                <%= render 'public/book_comments/index', book: @book %>
+            </div>
+            
             <%= render 'public/book_comments/form', book: @book, book_comment: @book_comment %>
+            
         </div>
     </div>
 </div>

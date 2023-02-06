@@ -26,8 +26,8 @@ class Public::BooksController < ApplicationController
             flash[:notice] = '投稿に成功しました！'
             redirect_to public_book_path(@book)
         else
-            flash[:notice] = '操作が違うのでやり直してください'
-            redirect_referer
+            @books = Book.all
+            render 'index'
         end
     end
     

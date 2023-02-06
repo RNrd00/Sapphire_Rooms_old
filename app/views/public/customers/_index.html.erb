@@ -9,12 +9,18 @@
     </thead>
     <tbody>
         <% customer.each do |customer| %>
-        <tr>
-            <td><%= image_tag customer.get_profile_image, size: '50x50' %></td>
-            <td><%= customer.id %></td>
-            <td><%= customer.name %></td>
-            <td><%= render 'public/relationships/btn', customer: customer %></td>
-        </tr>
+            <% if customer.name != "guestuser" %>
+            <tr>
+                <td>
+                <%= link_to public_customer_path(customer.id) do %>
+                    <%= image_tag customer.get_profile_image, size: '50x50' %>
+                <% end %>
+                </td>
+                <td><%= customer.id %></td>
+                <td><%= customer.name %></td>
+                <td><%= render 'public/relationships/btn', customer: customer %></td>
+            </tr>
+            <% end %>
         <% end %>
     </tbody>
 </table>

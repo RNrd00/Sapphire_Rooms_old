@@ -14,8 +14,11 @@ class Public::BooksController < ApplicationController
 
     def show
         @book = Book.find(params[:id])
-        @customer = current_customer
+        unless ViewCount.find_by(customer_id: current_customer.id, book_id: @book.id)
+            current_customer.view_counts.create(book_id: @book.id)
+        end
         @book_comment = BookComment.new
+        @customer = current_customer
     end
     
     def edit

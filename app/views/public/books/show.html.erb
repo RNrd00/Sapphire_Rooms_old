@@ -19,6 +19,7 @@
         <div class="book-comments-counter">
             <%= render "public/book_comments/counter", book: @book %>
         </div>
+        <div class="view-count">閲覧数: <%= @book.view_counts.count %></div>
         <% if !current_page?(public_book_path(@book.id)) %>
             <%= link_to "コメント詳細ページ", public_book_path(@book.id), method: :get, class:'btn btn-success' %>
         <% end %>

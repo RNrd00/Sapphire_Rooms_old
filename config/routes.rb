@@ -19,6 +19,7 @@ devise_for :customers,skip: [:passwords], controllers: {
         get :likes
       end
     end
+    resources :chats, only: [:show, :create]
   end
   
   scope module: :public do

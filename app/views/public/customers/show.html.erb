@@ -13,10 +13,13 @@
     <div class="row">
         <div class="col-sm-12 mx-auto">
             <p><%= @customer.introduce %></p>
-            <% if !admin_signed_in? %>
+            <% unless admin_signed_in? %>
                 <%= link_to '編集する', edit_public_customer_path(current_customer), method: :get, class:'btn btn-success' %>
+                <% if current_customer != @customer && current_customer.following?(@customer) && @customer.following?(current_customer) %>
+                    <%= link_to 'チャットを始める', public_chat_path(@customer.id), class:'btn btn-info ml-3' %>
+                <% end %>
             <% end %>
         </div>
     </div>
-    <%= link_to "ブックマーク一覧", likes_public_customer_path(@customer), method: :get, class:'btn btn-success' %>
+    <%= link_to "ブックマーク一覧", likes_public_customer_path(@customer), method: :get, class:'btn btn-success mt-3' %>
 </div>

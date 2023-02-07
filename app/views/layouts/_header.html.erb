@@ -28,6 +28,29 @@
                 <%end%>
               </li>
               
+              <% elsif admin_signed_in? %>
+              
+              <li>
+                <%= link_to root_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-home"></i> ホーム
+                <%end%>
+              </li>
+              <li>
+                <%= link_to public_customers_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-users"></i> 会員一覧
+                <%end%>
+              </li>
+              <li>
+                <%= link_to public_books_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-book-open"></i> 投稿
+                <%end%>
+              </li>
+              <li>
+                <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
+                  <i class="fas fa-sign-out-alt"></i> ログアウト
+                <%end%>
+              </li>
+              
               <%else%>
               
               <li>
@@ -53,6 +76,11 @@
               <li>
                 <%= link_to customer_guest_sign_in_path, class: 'nav-link text-light', method: :post do %>
                   <i class="fa fa-user"></i> ゲストログイン
+                <% end %>
+              </li>
+              <li>
+                <%= link_to new_admin_session_path, class: 'nav-link text-light', method: :post do %>
+                  <i class="fas fa-chess-king"></i> 管理者ログイン
                 <% end %>
               </li>
               <%end%>

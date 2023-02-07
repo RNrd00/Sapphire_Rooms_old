@@ -18,7 +18,15 @@
                 </td>
                 <td><%= customer.id %></td>
                 <td><%= customer.name %></td>
-                <td><%= render 'public/relationships/btn', customer: customer %></td>
+                <% unless admin_signed_in? %>
+                <td>
+                    <% if current_customer.name != "guestuser" %>
+                        <%= render 'public/relationships/btn', customer: customer %>
+                    <% else %>
+                        <h6 class="text-success">ゲストユーザーはフォロー機能を使用できません。ログインしてください。</h6>
+                    <% end %>
+                </td>
+                <% end %>
             </tr>
             <% end %>
         <% end %>

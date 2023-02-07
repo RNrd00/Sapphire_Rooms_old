@@ -9,11 +9,13 @@
         </div>
         <br>
         <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
-            <%= safe_join(@book.introduce.split("\n"),tag(:br)) %>
+            <h4><%= safe_join(@book.introduce.split("\n"),tag(:br)) %></h4>
         </div>
-        <div class=<%= "favorite-" + @book.id.to_s %> >
-            <%= render 'public/favorites/btn', book: @book %>
-        </div>
+        <% if !admin_signed_in? %>
+            <div class=<%= "favorite-" + @book.id.to_s %> >
+                <%= render 'public/favorites/btn', book: @book %>
+            </div>
+        <% end %>
         <div class="book-comments-counter">
             <%= render "public/book_comments/counter", book: @book %>
         </div>
@@ -30,8 +32,8 @@
                 <br>
                 <%= text_field_tag :key, @word, placeholder: '削除パスワード(1~100の文字か数字)', class:'w-50' %><br>
                 <br>
-                <%= submit_tag '投稿を削除する', data: {confirm: "本当に削除しますか？"} %>
-                <br>
+                <%= submit_tag '投稿を削除する', data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger' %>
+                <%= link_to '投稿を編集する', edit_public_book_path(@book), class: "btn btn-primary edit_public_book_#{@book.id}" %>
             <% end %>
         <% end %>
         </div>
@@ -46,9 +48,13 @@
             <div class="book-comments-index">
                 <%= render 'public/book_comments/index', book: @book %>
             </div>
-            
-            <%= render 'public/book_comments/form', book: @book, book_comment: @book_comment %>
-            
+            <% unless admin_signed_in? %>
+                <% if @customer.name != "guestuser" %>
+                    <%= render 'public/book_comments/form', book: @book, book_comment: @book_comment %>
+                <% else %>
+                    <h3 class="text-warning">ゲストユーザーなのでコメント機能は使用できません。ログインしてください。</h3>
+                <% end %>
+            <% end %>
         </div>
     </div>
 </div>

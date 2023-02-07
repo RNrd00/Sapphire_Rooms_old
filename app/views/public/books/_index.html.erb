@@ -1,7 +1,8 @@
 <div class="row">
     <div class="col-sm-12">
-    <div class="border border-success">
+    
         <% books.each do |book| %>
+        <div class="border border-success mb-5">
         <br>
         <div class="d-flex justify-content-around">
             <div class="border border-5 border-dark">ユーザー名:<%= book.name %></div>
@@ -9,11 +10,13 @@
         </div>
         <br>
         <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
-            <%= safe_join(book.introduce.split("\n"),tag(:br)) %>
+            <h4><%= safe_join(book.introduce.split("\n"),tag(:br)) %></h4>
         </div>
-        <div class=<%= "favorite-" + book.id.to_s %> >
-            <%= render 'public/favorites/btn', book: book %>
-        </div> 
+        <% if !admin_signed_in? %>
+            <div class=<%= "favorite-" + book.id.to_s %> >
+                <%= render 'public/favorites/btn', book: book %>
+            </div> 
+        <% end %>
         <% if !current_page?(public_book_path(book.id)) %>
             <%= link_to "コメント詳細ページ", public_book_path(book.id), method: :get, class:'btn btn-success' %>
         <% end %>

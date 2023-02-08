@@ -11,6 +11,10 @@ class Public::CustomersController < ApplicationController
     def show
         @customer = Customer.find(params[:id])
         @book = @customer.books
+        @today_book = @book.created_today
+        @yesterday_book = @book.created_yesterday
+        @this_week_book = @book.created_this_week
+        @last_week_book = @book.created_last_week
     end
     
     def edit

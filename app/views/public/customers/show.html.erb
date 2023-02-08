@@ -22,4 +22,11 @@
         </div>
     </div>
     <%= link_to "ブックマーク一覧", likes_public_customer_path(@customer), method: :get, class:'btn btn-success mt-3' %>
+    <% if admin_signed_in? %>
+        <div class="row">
+            <div class="col-sm-12 mx-auto">
+                <%= render 'book_totalling', book: @book %>
+            </div>
+        </div>
+    <% end %>
 </div>

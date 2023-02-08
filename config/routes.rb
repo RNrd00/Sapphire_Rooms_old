@@ -15,6 +15,7 @@ devise_for :customers,skip: [:passwords], controllers: {
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+      get "daily_posts" => "customers#daily_posts"
       member do
         get :likes
       end

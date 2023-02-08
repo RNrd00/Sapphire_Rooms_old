@@ -32,6 +32,13 @@ class Public::CustomersController < ApplicationController
         @like_books = Book.find(likes)
     end
     
+    def daily_posts
+    
+        customer = Customer.find(params[:customer_id])
+        @books = customer.books.where(created_at: params[:created_at].to_date.all_day)
+        render :daily_posts_form
+    end
+    
     private
     
     def customer_params

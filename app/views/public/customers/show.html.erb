@@ -25,6 +25,7 @@
     <% if admin_signed_in? %>
         <div class="row">
             <div class="col-sm-12 mx-auto">
+                <%= render 'daily_posts_form', customer: @customer %>
                 <%= render 'book_totalling', book: @book %>
             </div>
         </div>

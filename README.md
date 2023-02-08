@@ -33,3 +33,5 @@ SNSサイトは数多く存在しますが、特定の趣味に特化し尚且�
 
 ## 使用素材
 - Fontawesome(https://fontawesome.com/)
+- chart.js(https://www.chartjs.org/)
+- raty(https://github.com/wbotelhos/raty)

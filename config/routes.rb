@@ -20,6 +20,7 @@ devise_for :customers,skip: [:passwords], controllers: {
         get :likes
       end
     end
+    resources :groups, only: [:new, :index, :show, :create, :edit, :update]
     resources :chats, only: [:show, :create]
   end
   

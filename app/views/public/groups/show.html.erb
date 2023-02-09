@@ -1,0 +1,20 @@
+<div class="container">
+    <%= render 'layouts/errors', obj: @book %>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 px-5 px-sm-0 mx-auto">
+            <h3>グループ詳細</h3>
+            <table class="table table-hover table-inverse">
+                <tr>
+                    <td><%= image_tag @group.get_image, size: '50x50' %></td>
+                    <td><%= @group.name %></td>
+                    <td><%= @group.introduction %></td>
+                    <td>
+                        <% if @group.is_owner_by?(current_customer) %>
+                            <%= link_to 'Edit', edit_public_group_path(@group), class: 'btn btn-sm btn-success' %>
+                        <% end %>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

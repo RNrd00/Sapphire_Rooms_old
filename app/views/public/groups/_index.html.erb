@@ -1,8 +1,9 @@
 <table class='table'>
     <thead>
         <tr>
-            <th>image</th>
-            <th>name</th>
+            <th>画像</th>
+            <th>名前</th>
+            <th>メンバー</th>
             <th colspan="3"></th>
         </tr>
     </thead>
@@ -10,8 +11,8 @@
         <% groups.each do |group| %>
             <tr>
                 <td><%= image_tag group.get_image, size: '50x50' %></td>
-                <td><%= group.name %></td>
-                <td><%= link_to 'Show', public_group_path(group), class: "group_#{group.id}" %></td>
+                <td><%= link_to group.name, public_group_path(group), class: "group_#{group.id}" %></td>
+                <td><%= group.group_customers.count %></td>
                 <% if group.is_owner_by?(current_customer) %>
                     <td><%= link_to 'Edit', edit_public_group_path(group), class: "group_#{group.id}" %></td>
                 <% end %>

@@ -19,6 +19,9 @@ class Customer < ApplicationRecord
   
   has_one_attached :profile_image
   
+  validates :name, length: {minimum: 1, maximum: 100}, uniqueness: true
+  validates :introduce, length: { maximum: 10000 }
+  
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg' #論理演算子でリファクタリング
   end

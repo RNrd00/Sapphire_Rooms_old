@@ -26,6 +26,7 @@ devise_for :customers,skip: [:passwords], controllers: {
       get "event_notices" => "event_notices#sent"
     end
     resources :chats, only: [:show, :create]
+    resources :ratings, only: [:index, :create, :destroy]
   end
   
   scope module: :public do

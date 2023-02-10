@@ -20,7 +20,7 @@
                     <td><% @group.customers.each { |customer| %><li style="list-style: none;"><%= customer.name %></li><% } %></td>
                     <% if @group.is_owner_by?(current_customer) %>
                         <td>
-                            <%= link_to 'Edit', edit_public_group_path(@group), class: 'btn btn-sm btn-success' %>
+                            <%= link_to '編集する', edit_public_group_path(@group), class: 'btn btn-sm btn-success' %>
                         </td>
                         <td>
                             <%= link_to 'イベントを知らせる', new_public_group_event_notice_path(@group), class: "btn btn-sm btn-info" %>

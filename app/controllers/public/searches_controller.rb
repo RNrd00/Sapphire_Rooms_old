@@ -7,8 +7,10 @@ class Public::SearchesController < ApplicationController
         @method = params[:method]
         if @model == 'customer'
            @records = Customer.search_for(@content, @method)
-        else
+        elsif @model == 'book'
            @records = Book.search_for(@content, @method)
+        else
+           @records = Tag.search_ratings_for(@content, @method)
         end
     end
 end

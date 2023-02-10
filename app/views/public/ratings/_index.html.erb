@@ -4,11 +4,15 @@
         <div class="d-flex justify-content-around">
             <div class="border border-5 border-dark">ユーザー名:<%= ratings.name %></div>
             <div class="border border-5 border-dark">投稿者のID:<%= ratings.customer_id %></div>
+            <div class="border border-5 border-dark">
+                <% ratings.tags.each { |tag| %><li style="list-style: none;">タグ:<%= link_to tag.name, public_search_path(content: tag.name, model: "tag", method: "perfect") %></li><% } %>
+            </div>
         </div>
         <br>
         <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
             <h4><%= safe_join(ratings.introduction.split("\n"),tag(:br)) %></h4>
         </div>
             <%= render "public/ratings/static_rate", rating: ratings %>
+            <%= link_to "レビューを削除する", public_rating_path(ratings), remote:true, method: :delete, class:'btn btn-danger', data:{confirm: '本当に削除しますか？'} %>
     </div>
 <% end %>

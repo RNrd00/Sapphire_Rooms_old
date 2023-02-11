@@ -8,6 +8,7 @@ class Book < ApplicationRecord
     has_many :week_favorites, -> { where(created_at: ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day)) }, class_name: 'Favorite'
     
     validates :name, presence:true
+    validates :introduce, presence:true, length: { maximum: 10000 }
     validates :delete_key, format:{with: /\A\w{1,100}\z/i } #リファクタリングで正規表現を使用しました！
     
     scope :created_today, -> { where(created_at: Time.zone.now.all_day) }

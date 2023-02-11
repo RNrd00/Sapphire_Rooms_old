@@ -32,6 +32,7 @@ class Public::BooksController < ApplicationController
             redirect_to public_book_path(@book), notice: '投稿に成功しました！'
         else
             @books = Book.all
+            @customer = current_customer
             render 'index'
         end
     end

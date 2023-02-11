@@ -1,7 +1,7 @@
 class Public::GroupsController < ApplicationController
     before_action :ensure_correct_customer, only: [:edit, :update]
-    before_action :move_to_sign_in, expect: [:index, :show, :edit, :update, :new, :create]
     before_action :authenticate_customer!
+    before_action :move_to_sign_in, expect: [:index, :show, :edit, :update, :new, :create]
     
     def new
         @group = Group.new

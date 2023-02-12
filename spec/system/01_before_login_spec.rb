@@ -67,33 +67,33 @@ describe '[STEP1] ユーザログイン前のテスト' do
     context 'リンクの内容を確認' do
       subject { current_path }
       
-      it 'Bookersを押すと、トップ画面に遷移する' do
+      it 'SapphireRoomsを押すと、トップ画面に遷移する' do
         root_link = find_all('a')[0].text
         root_link = root_link.delete(' ')
         root_link.gsub!(/\n/, '')
         click_link root_link
         is_expected.to eq '/'
       end
-      it 'Homeを押すと、トップ画面に遷移する' do
+      it 'ホームを押すと、トップ画面に遷移する' do
         root_link = find_all('a')[1].text
         root_link = root_link.delete(' ')
         root_link.gsub!(/\n/, '')
         click_link root_link
         is_expected.to eq '/'
       end
-      it 'Aboutを押すと、アバウト画面に遷移する' do
+      it 'サイト紹介を押すと、アバウト画面に遷移する' do
         about_link = find_all('a')[2].text
         about_link = about_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link about_link
         is_expected.to eq '/public/home/about'
       end
-      it 'Sign upを押すと、新規登録画面に遷移する' do
+      it '会員登録を押すと、新規登録画面に遷移する' do
         signup_link = find_all('a')[3].text
         signup_link = signup_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link signup_link, match: :first
-        is_expected.to eq '/users/sign_up'
+        is_expected.to eq '/customers/sign_up'
       end
-      it 'Log inを押すと、ログイン画面に遷移する' do
+      it 'ログインを押すと、ログイン画面に遷移する' do
         login_link = find_all('a')[4].text
         login_link = login_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link login_link, match: :first
@@ -144,7 +144,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
       it '新規登録後のリダイレクト先が、新規登録できたユーザの詳細画面になっている' do
         click_button '新規登録'
-        expect(current_path).to eq '/public/customers/' + Customer.last.id.to_s
+        expect(current_path).to eq '/'
       end
     end
   end
@@ -185,7 +185,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       end
 
       it 'ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている' do
-        expect(current_path).to eq '/public/customers/' + customer.id.to_s
+        expect(current_path).to eq '/'
       end
     end
 
@@ -222,8 +222,8 @@ describe '[STEP1] ユーザログイン前のテスト' do
         expect(root_link).to match(/ホーム/)
       end
       it '会員一覧リンクが表示される: 左上から3番目のリンクが「会員一覧」である' do
-        users_link = find_all('a')[2].text
-        expect(users_link).to match(/会員一覧/)
+        customers_link = find_all('a')[2].text
+        expect(customers_link).to match(/会員一覧/)
       end
       it '投稿リンクが表示される: 左上から4番目のリンクが「投稿」である' do
         books_link = find_all('a')[3].text
@@ -248,7 +248,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[4].text
+      logout_link = find_all('a')[5].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
     end

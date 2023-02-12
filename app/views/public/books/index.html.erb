@@ -1,4 +1,5 @@
 <div class="container jQuery_aplly">
+    <h2 class="text-success"><%= flash[:notice] %><br></h2>
     <div class="errors">
         <%= render "layouts/errors", obj: @book %>
     </div>
@@ -24,7 +25,6 @@
     <div class="row">
         <div class="col-sm-6">
             <h1>フリートーク</h1>
-            <%= flash[:notice] %><br><br>
         </div>
     </div>
     <% unless admin_signed_in? %>

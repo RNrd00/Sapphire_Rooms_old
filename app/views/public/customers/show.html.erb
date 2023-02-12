@@ -1,4 +1,5 @@
 <div class="container jQuery_aplly">
+    <h2 class="text-success"><%= flash[:notice] %></h2>
     <h3>ユーザー情報</h3>
     <div class="row">
         <div class="col-sm-12 mx-auto">
@@ -14,7 +15,9 @@
         <div class="col-sm-12 mx-auto">
             <p><%= @customer.introduce %></p>
             <% unless admin_signed_in? %>
-                <%= link_to '編集する', edit_public_customer_path(current_customer), method: :get, class:'btn btn-success' %>
+                <% if current_customer.name != "guestuser" && @customer == current_customer %>
+                    <%= link_to '編集する', edit_public_customer_path(current_customer), method: :get, class:'btn btn-success' %>
+                <% end %>
                 <% if current_customer != @customer && current_customer.following?(@customer) && @customer.following?(current_customer) %>
                     <%= link_to 'チャットを始める', public_chat_path(@customer.id), class:'btn btn-info ml-3' %>
                 <% end %>
@@ -22,6 +25,13 @@
         </div>
     </div>
     <%= link_to "ブックマーク一覧", likes_public_customer_path(@customer), method: :get, class:'btn btn-success mt-3' %>
+    <div class="row">
+        <div class="col-sm-12 mx-auto">
+            <br>
+            <h1>投稿一覧</h1>
+            <%= render 'public/books/index', books: @book %>
+　　　　</div>
+    </div>
     <% if admin_signed_in? %>
         <div class="row">
             <div class="col-sm-12 mx-auto">

@@ -9,6 +9,12 @@
             <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
         </div>
         <br>
+        <div>
+            <%= link_to public_customer_path(book.customer) do %>
+                <%= image_tag book.customer.get_profile_image, size:'100x100' %>
+            <% end %>
+        </div>
+        <br>
         <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
             <h4><%= safe_join(book.introduce.split("\n"),tag(:br)) %></h4>
         </div>

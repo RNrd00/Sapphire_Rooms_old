@@ -1,6 +1,9 @@
-<div class="container">
+<div class="container jQuery_aplly">
     <div class="row">
-        <div class="col-sm-10 col-md-12 col-lg-12 px-4 px-sm-0 mx-auto">
+        <div class="col-sm-12 col-md-12 col-lg-12 px-4 px-sm-0 mx-auto">
+            <div class="errors">
+                <%= render "layouts/errors", obj: @book %>
+            </div>
             <h1>コメント編集画面</h1>
             <%= form_with model: @book, method: :patch, url: public_book_path do |f| %>
                 <%= f.label '貴方の名前:' %>
@@ -13,6 +16,9 @@
                 <br>
                 <%= f.submit '編集完了', class:'btn btn-success' %>
             <% end %>
+            <br>
+            <%= link_to '詳細ページに戻る', public_book_path(@book), class:'btn btn-info' %>
+            <%= link_to '一覧画面に戻る', public_books_path, class:'btn btn-secondary' %>
         </div>
     </div>
 </div>

@@ -23,8 +23,11 @@ class Public::CustomersController < ApplicationController
     
     def update
         @customer = Customer.find(params[:id])
-        @customer.update(customer_params)
-        redirect_to public_customer_path(current_customer)
+        if @customer.update(customer_params)
+            redirect_to public_customer_path(current_customer), notice: 'プロフィールの更新に成功しました！'
+        else
+            render 'edit'
+        end
     end
     
     def likes

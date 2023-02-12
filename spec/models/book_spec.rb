@@ -24,7 +24,7 @@ RSpec.describe 'Bookモデルのテスト', type: :model do
         is_expected.to eq true
       end
       it '10000文字以下であること: 10001文字は×' do
-        book.body = Faker::Lorem.characters(number: 10001)
+        book.introduce = Faker::Lorem.characters(number: 10001)
         is_expected.to eq false
       end
     end

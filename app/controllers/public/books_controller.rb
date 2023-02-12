@@ -1,5 +1,6 @@
 class Public::BooksController < ApplicationController
     before_action :move_to_sign_in, expect: [:index, :show, :edit, :update, :create, :destroy]
+    before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
     
     def index
         to = Time.current.at_end_of_day
@@ -70,5 +71,12 @@ class Public::BooksController < ApplicationController
       unless customer_signed_in? || admin_signed_in?
           redirect_to new_customer_session_path
       end
+  end
+  
+  def ensure_correct_customer
+    @customer = Customer.find(params[:id])
+    unless @customer == current_customer
+        redirect_to public_books_path
+    end
   end
 end

@@ -1,10 +1,9 @@
 class Public::RatingsController < ApplicationController
-    before_action :move_to_sign_in, expect: [:index, :create, :destroy]
-    before_action :ensure_correct_customer, only: [:destroy]
+    before_action :move_to_sign_in, expect: [:index]
     before_action :exist_rating?, only:[:destroy]
     
     def index
-        @ratings = Rating.all.order(params[:sort])
+        @ratings = Rating.page(params[:page]).order(params[:sort])
         @rating = Rating.new
     end
     
@@ -24,7 +23,7 @@ class Public::RatingsController < ApplicationController
     def destroy
         @rating = Rating.find(params[:id])
         @rating.destroy
-        redirect_to request.referer, notice: 'レビューを削除しました'
+        redirect_to root_path, notice: 'レビューを削除しました'
     end
     
     private

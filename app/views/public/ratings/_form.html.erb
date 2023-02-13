@@ -7,18 +7,15 @@
     <%= f.label "評価所感" %>
     <%= f.text_area :introduction, rows:'5', class:'form-control' %>
   </div>
-  
   <div class="form-group">
     <%= f.label "タグ" %>
     <%= f.text_field :tag_name, class: 'form-control rating_tag_name' %>
   </div>
-
   <% if rating.id === nil %>
     <div class="form-group" id="star">
-      <%= f.label :rate %>
+      <%= f.label "レビュー" %>
       <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
     </div>
-    
     <div id="post_raty"></div>
     <script>
       $(document).on('turbolinks:load', function() {
@@ -33,13 +30,10 @@
       raty(raty_elem,option);
      });
     </script>
-    
-   
   <% else %>
     <%= render "public/ratings/static_rate", rating: rating %>
   <% end %>
-  
   <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
+    <%= f.submit "レビューする" ,class: 'btn btn-success' %>
   </div>
 <% end %>

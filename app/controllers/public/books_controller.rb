@@ -11,6 +11,7 @@ class Public::BooksController < ApplicationController
             b.favorites.where(created_at: from...to).size <=>
             a.favorites.where(created_at: from...to).size
         }
+        @books = Kaminari.paginate_array(@books).page(params[:page])
         @book = Book.new
         @customer = current_customer
     end

@@ -14,7 +14,7 @@
             <% end %>
         </div>
         <br>
-        <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
+        <div class="col-sm-12 border border-5 border-primary rounded mx-left">
             <h4><%= safe_join(book.introduce.split("\n"),tag(:br)) %></h4>
         </div>
         <% if !admin_signed_in? %>
@@ -27,5 +27,6 @@
         <% end %>
         </div>
         <% end %>
+        <%= paginate books %>
     </div>
 </div>

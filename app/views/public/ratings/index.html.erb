@@ -1,10 +1,14 @@
-<div class="container">
+<div class="container jQuery_aplly">
     <h3 class="text-info"><%= flash[:notice] %></h3>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-            <h1>サイトレビュー</h1>
-            <p>このサイトに対するレビューを行えます。是非レビューお願いします！</p>
-            <%= render 'public/ratings/form', rating: @rating %>
+            <% if !admin_signed_in? %>
+                <h1>サイトレビュー</h1>
+                <p>このサイトに対するレビューを行えます。是非レビューお願いします！</p>
+                <%= render 'public/ratings/form', rating: @rating %>
+            <% else %>
+                <h1>管理者用レビュー画面</h1>
+            <% end %>
             <%= link_to '新しい順', public_ratings_path(sort: 'created_at DESC') %> | <%= link_to '評価の高い順', public_ratings_path(sort: 'rate DESC') %>
             <%= render 'public/ratings/index', ratings: @ratings %>
         </div>

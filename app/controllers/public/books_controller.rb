@@ -1,6 +1,8 @@
 class Public::BooksController < ApplicationController
     before_action :move_to_sign_in, expect: [:index, :show, :edit, :update, :create, :destroy]
     before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
+    before_action :ensure_guest_customer, only: [:edit]
+    before_action :exist_book?, only:[:show, :edit, :update, :destroy]
     
     def index
         to = Time.current.at_end_of_day
@@ -15,8 +17,10 @@ class Public::BooksController < ApplicationController
 
     def show
         @book = Book.find(params[:id])
-        unless ViewCount.find_by(customer_id: current_customer.id, book_id: @book.id)
-            current_customer.view_counts.create(book_id: @book.id)
+        if !admin_signed_in?
+            unless ViewCount.find_by(customer_id: current_customer.id, book_id: @book.id)
+                current_customer.view_counts.create(book_id: @book.id)
+            end
         end
         @book_comment = BookComment.new
         @customer = current_customer
@@ -67,10 +71,23 @@ class Public::BooksController < ApplicationController
     params.require(:book).permit(:name, :introduce, :delete_key)
   end
   
+  def exist_book?
+    unless Book.find_by(id: params[:id])
+      redirect_to root_path, notice: '申し訳ございませんが、そのページは削除されているか元から存在しません。'
+    end
+  end
+  
   def move_to_sign_in
       unless customer_signed_in? || admin_signed_in?
           redirect_to new_customer_session_path
       end
+  end
+  
+  def ensure_guest_customer
+    @customer = Customer.find(params[:id])
+    if @customer.name == "guestuser"
+        redirect_to public_books_path, notice:'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    end
   end
   
   def ensure_correct_customer

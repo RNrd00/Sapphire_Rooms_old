@@ -13,6 +13,10 @@
             <h4><%= safe_join(ratings.introduction.split("\n"),tag(:br)) %></h4>
         </div>
             <%= render "public/ratings/static_rate", rating: ratings %>
+        <% if ratings.customer == current_customer %>
             <%= link_to "レビューを削除する", public_rating_path(ratings), remote:true, method: :delete, class:'btn btn-danger', data:{confirm: '本当に削除しますか？'} %>
+        <% elsif admin_signed_in? %>
+            <%= link_to "管理者用レビュー削除", public_rating_path(ratings), remote:true, method: :delete, class:'btn btn-danger', data:{confirm: '本当に削除しますか？'} %>
+        <% end %>
     </div>
 <% end %>

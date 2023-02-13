@@ -3,9 +3,10 @@ class Public::CustomersController < ApplicationController
     before_action :ensure_guest_customer, only: [:edit]
     before_action :set_customer, only: [:likes]
     before_action :ensure_correct_customer, only: [:edit, :update]
+    before_action :exist_customer?, only:[:show, :edit, :update, :destroy]
     
     def index
-        @customer = Customer.all
+        @customer = Customer.page(params[:page])
     end
     
     def show
@@ -36,7 +37,6 @@ class Public::CustomersController < ApplicationController
     end
     
     def daily_posts
-    
         customer = Customer.find(params[:customer_id])
         @books = customer.books.where(created_at: params[:created_at].to_date.all_day)
         render :daily_posts_form
@@ -50,6 +50,12 @@ class Public::CustomersController < ApplicationController
     
     def set_customer
         @customer = Customer.find(params[:id])
+    end
+    
+    def exist_customer?
+        unless Customer.find_by(id: params[:id])
+            redirect_to root_path, notice: '申し訳ございませんが、そのページは削除されているか元から存在しません。'
+        end
     end
     
     def ensure_guest_customer

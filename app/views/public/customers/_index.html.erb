@@ -31,13 +31,14 @@
             </tr>
             <% end %>
         <% end %>
+        <%= paginate customer %>
     </tbody>
 </table>
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
-            <%= link_to "グループ作成", new_public_group_path %>
-            <%= link_to "グループ一覧", public_groups_path %>
+            <%= link_to "グループ作成", new_public_group_path, class:'btn btn-primary' %>
+            <%= link_to "グループ一覧", public_groups_path, class:'btn btn-primary' %>
         </div>
     </div>
 </div>

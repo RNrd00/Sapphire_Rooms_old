@@ -1,3 +1,4 @@
+<div class="jQuery_aplly">
 <% if @model == 'customer' %>
     <h3>Customers search for "<%= @content %>"</h3>
     <%= render 'public/customers/index', customer: @records %>
@@ -8,3 +9,4 @@
     <h3>Comments search for "<%= @content %>"</h3>
     <%= render 'public/ratings/index', ratings: @records %>
 <% end %>
+</div>

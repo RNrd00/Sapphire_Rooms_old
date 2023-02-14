@@ -7,6 +7,9 @@
         <div class="d-flex justify-content-around">
             <div class="border border-5 border-dark">ユーザー名:<%= book.name %></div>
             <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
+            <div class="border border-5 border-dark">
+                <% book.tags.each { |tag| %><li style="list-style: none;">タグ:<%= link_to tag.name, public_search_path(content: tag.name, model: "book_tag", method: "perfect") %></li><% } %>
+            </div>
         </div>
         <br>
         <div>

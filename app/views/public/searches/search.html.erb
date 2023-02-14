@@ -2,11 +2,11 @@
 <% if @model == 'customer' %>
     <h3>Customers search for "<%= @content %>"</h3>
     <%= render 'public/customers/index', customer: @records %>
-<% elsif @model == 'book' %>
-    <h3>Comments search for "<%= @content %>"</h3>
-    <%= render 'public/books/index', books: @records %>
-<% else %>
+<% elsif @model == 'tag' %>
     <h3>Comments search for "<%= @content %>"</h3>
     <%= render 'public/ratings/index', ratings: @records %>
+<% elsif @model == 'book' || 'book_tag' %>
+    <h3>Comments search for "<%= @content %>"</h3>
+    <%= render 'public/books/index', books: @records %>
 <% end %>
 </div>

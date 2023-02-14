@@ -1,6 +1,6 @@
 class Public::BooksController < ApplicationController
     before_action :move_to_sign_in, expect: [:index, :show, :edit, :update, :create, :destroy]
-    before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
+    before_action :ensure_correct_customer, only: [:edit, :update]
     before_action :ensure_guest_customer, only: [:edit]
     before_action :exist_book?, only:[:show, :edit, :update, :destroy]
 
@@ -33,11 +33,13 @@ class Public::BooksController < ApplicationController
 
     def create
         @book = Book.new(book_params)
-            @book.customer_id = current_customer.id
+        @book.customer_id = current_customer.id
+        tag_list = params[:book][:tag_name].split(',')
         if  @book.save
+            @book.save_tags(tag_list)
             redirect_to public_book_path(@book), notice: '投稿に成功しました！'
         else
-            @books = Book.all
+            @books = Book.page(params[:page])
             @customer = current_customer
             render 'index'
         end

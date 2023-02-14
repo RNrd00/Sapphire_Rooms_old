@@ -3,7 +3,7 @@ class Public::BooksController < ApplicationController
     before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
     before_action :ensure_guest_customer, only: [:edit]
     before_action :exist_book?, only:[:show, :edit, :update, :destroy]
-    
+
     def index
         to = Time.current.at_end_of_day
         from = (to - 6.day).at_beginning_of_day
@@ -26,11 +26,11 @@ class Public::BooksController < ApplicationController
         @book_comment = BookComment.new
         @customer = current_customer
     end
-    
+
     def edit
         @book = Book.find(params[:id])
     end
-    
+
     def create
         @book = Book.new(book_params)
             @book.customer_id = current_customer.id
@@ -42,7 +42,7 @@ class Public::BooksController < ApplicationController
             render 'index'
         end
     end
-    
+
   def destroy
     @book = Book.find(params[:id])
     if @book.delete_key == params[:key]
@@ -56,7 +56,7 @@ class Public::BooksController < ApplicationController
       render 'show'
     end
   end
-  
+
     def update
         @book = Book.find(params[:id])
         if @book.update(book_params)
@@ -65,32 +65,32 @@ class Public::BooksController < ApplicationController
             render 'edit'
         end
     end
-  
+
   private
-  
+
   def book_params
     params.require(:book).permit(:name, :introduce, :delete_key)
   end
-  
+
   def exist_book?
     unless Book.find_by(id: params[:id])
       redirect_to root_path, notice: '申し訳ございませんが、そのページは削除されているか元から存在しません。'
     end
   end
-  
+
   def move_to_sign_in
       unless customer_signed_in? || admin_signed_in?
           redirect_to new_customer_session_path
       end
   end
-  
+
   def ensure_guest_customer
     @customer = Customer.find(params[:id])
     if @customer.name == "guestuser"
         redirect_to public_books_path, notice:'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
-  
+
   def ensure_correct_customer
     @customer = Customer.find(params[:id])
     unless @customer == current_customer

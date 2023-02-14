@@ -6,14 +6,14 @@ class Public::BookCommentsController < ApplicationController
         @comment.book_id = book.id
         @comment.save
     end
-    
+
     def destroy
         @comment = BookComment.find(params[:id])
         @comment.destroy
     end
-    
+
     private
-    
+
     def book_comment_params
         params.require(:book_comment).permit(:comment)
     end

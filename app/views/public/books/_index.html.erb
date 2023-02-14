@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-sm-12">
         <% books.each do |book| %>
+        <% if book.customer.released? %>
         <div class="border border-success mb-5">
         <br>
         <div class="d-flex justify-content-around">
@@ -26,6 +27,7 @@
             <%= link_to "コメント詳細ページ", public_book_path(book.id), method: :get, class:'btn btn-success' %>
         <% end %>
         </div>
+        <% end %>
         <% end %>
         <%= paginate books %>
     </div>

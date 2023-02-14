@@ -16,11 +16,13 @@ class Public::RelationshipsController < ApplicationController
     def followings
         customer = Customer.find(params[:customer_id])
         @customers = customer.followings
+        @book = customer.books.page(params[:page])
     end
     
     def followers
         customer = Customer.find(params[:customer_id])
         @customers = customer.followers
+        @book = customer.books.page(params[:page])
     end
     
     private

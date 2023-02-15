@@ -1,0 +1,19 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class='m-2'>
+  <%= link_to public_customer_path(visitor) do %>
+    <span class="visitor_cutomer_image_box"></span>
+    <%= visitor.name %>
+  <% end %>
+  <span>さんが</span>
+
+  <% case notification.action %>
+    <% when 'follow' then %>
+      <%= "あなたをフォローしました" %>
+    <% when 'chat' then %>
+      <%= link_to 'あなたにメッセージ', public_chat_path(notification.visitor), style:"font-weight: bold;", class: "border-bottom" %>
+      <%= "を送りました" %>
+  <% end %>
+  <span><%= " (#{time_ago_in_words(notification.created_at)}前)" %></span><br>
+</div>

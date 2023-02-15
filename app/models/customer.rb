@@ -17,7 +17,9 @@ class Customer < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
-  has_many :time_lines
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   has_one_attached :profile_image
 
@@ -51,6 +53,17 @@ class Customer < ApplicationRecord
       Customer.where('name LIKE ?', '%' + content)
     else
       Customer.where('name LIKE ?', '%' + content + '%')
+    end
+  end
+
+  def create_notification_follow!(current_customer)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_customer.id, id, 'follow'])
+    if temp.blank?
+      notification = current_customer.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
     end
   end
 

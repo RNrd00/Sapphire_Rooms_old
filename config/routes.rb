@@ -29,6 +29,7 @@ devise_for :customers,skip: [:passwords], controllers: {
     end
     resources :chats, only: [:show, :create]
     resources :ratings, only: [:index, :create, :destroy]
+    resources :notifications, only: [:index]
   end
   
   scope module: :public do

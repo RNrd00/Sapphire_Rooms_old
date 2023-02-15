@@ -12,7 +12,7 @@ describe '[STEP3] 仕上げのテスト' do
     it 'ユーザ新規登録成功時' do
       visit new_customer_registration_path
       fill_in 'customer[name]', with: Faker::Lorem.characters(number: 9)
-      fill_in 'customer[email]', with: 'a' + customer.email # 確実にcustomer, other_customerと違う文字列にするため
+      fill_in 'customer[email]', with: 'a' + customer.email
       fill_in 'customer[password]', with: 'password'
       fill_in 'customer[password_confirmation]', with: 'password'
       click_button '新規登録'
@@ -30,7 +30,7 @@ describe '[STEP3] 仕上げのテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[5].text
+      logout_link = find_all('a')[6].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
       is_expected.to have_content 'successfully'
@@ -70,7 +70,7 @@ describe '[STEP3] 仕上げのテスト' do
       before do
         visit new_customer_registration_path
         @name = Faker::Lorem.characters(number: 0)
-        @email = 'a' + customer.email # 確実にcustomer, other_customerと違う文字列にするため
+        @email = 'a' + customer.email
         fill_in 'customer[name]', with: @name
         fill_in 'customer[email]', with: @email
         fill_in 'customer[password]', with: 'password'

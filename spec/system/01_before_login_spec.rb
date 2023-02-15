@@ -233,8 +233,12 @@ describe '[STEP1] ユーザログイン前のテスト' do
         rating_link = find_all('a')[4].text
         expect(rating_link).to match(/レビュー/)
       end
-      it 'ログアウトリンクが表示される: 左上から5番目のリンクが「ログアウト」である' do
+      it '通知リンクが表示される: 左上から5番目のリンクが「通知」である' do
         logout_link = find_all('a')[5].text
+        expect(logout_link).to match(/通知/)
+      end
+      it 'ログアウトリンクが表示される: 左上から6番目のリンクが「ログアウト」である' do
+        logout_link = find_all('a')[6].text
         expect(logout_link).to match(/ログアウト/)
       end
     end
@@ -248,7 +252,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[5].text
+      logout_link = find_all('a')[6].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
     end

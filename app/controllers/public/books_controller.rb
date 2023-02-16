@@ -82,7 +82,7 @@ class Public::BooksController < ApplicationController
 
   def move_to_sign_in
       unless customer_signed_in? || admin_signed_in?
-          redirect_to new_customer_session_path
+          redirect_to new_customer_session_path, notice:'ログインしてください。'
       end
   end
 
@@ -96,7 +96,7 @@ class Public::BooksController < ApplicationController
   def ensure_correct_customer
     @book = Book.find(params[:id])
     unless @book.customer == current_customer
-        redirect_to public_books_path
+        redirect_to public_books_path, notice:'他のユーザーの編集ページには遷移できません。'
     end
   end
 end

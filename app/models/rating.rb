@@ -3,8 +3,8 @@ class Rating < ApplicationRecord
     has_many :rating_tags, dependent: :destroy
     has_many :tags, through: :rating_tags
 
-    validates :name, presence: true
-    validates :introduction, presence: true
+    validates :name, presence: true, length: { maximum: 100 }
+    validates :introduction, presence: true, length: { maximum: 10000 }
 
     def save_tags(saverating_tags)
         current_tags = self.tags.pluck(:name) unless self.tags.nil?

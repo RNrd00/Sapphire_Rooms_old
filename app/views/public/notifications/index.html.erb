@@ -1,4 +1,4 @@
-<div class="text-center jQuery_aplly">
+<div class="text-center">
   <% unless admin_signed_in? %>
     <% notifications = @notifications.where.not(visitor_id: current_customer.id) %>
     <% if notifications.exists? %>

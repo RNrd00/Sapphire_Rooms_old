@@ -28,7 +28,7 @@ class Public::EventNoticesController < ApplicationController
 
   def move_to_sign_in
     unless customer_signed_in? || admin_signed_in?
-      redirect_to new_customer_session_path
+      redirect_to new_customer_session_path, notice:'ログインしてください。'
     end
   end
 end

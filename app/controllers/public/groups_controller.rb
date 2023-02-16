@@ -55,14 +55,14 @@ class Public::GroupsController < ApplicationController
     def ensure_guest_customer
         unless admin_signed_in?
             if current_customer.name == "guestuser"
-                redirect_to public_customer_path(current_customer), notice:'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+                redirect_to public_customer_path(current_customer), notice:'ゲストユーザーはグループ画面へ遷移できません。'
             end
         end
     end
 
   def move_to_sign_in
       unless customer_signed_in? || admin_signed_in?
-          redirect_to new_customer_session_path
+          redirect_to new_customer_session_path, notice:'ログインしてください。'
       end
   end
 

@@ -52,8 +52,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link '', href: public_customer_path(other_book.customer)
       end
       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-        expect(page).to have_link "コメント詳細ページ", href: public_book_path(book.id)
-        expect(page).to have_link "コメント詳細ページ", href: public_book_path(other_book.id)
+        expect(page).to have_link "入室する", href: public_book_path(book.id)
+        expect(page).to have_link "入室する", href: public_book_path(other_book.id)
       end
       it '自分の投稿と他人の投稿のオピニオンが表示される' do
         expect(page).to have_content book.introduce
@@ -78,8 +78,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/public/books/' + book.id.to_s
       end
-      it '「コメント詳細ページ」と表示される' do
-        expect(page).to have_content 'コメント詳細ページ'
+      it '「ルームページ」と表示される' do
+        expect(page).to have_content 'ルームページ'
       end
       it '投稿のnameが表示される' do
         expect(page).to have_content book.name
@@ -88,7 +88,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_content book.introduce
       end
       it '投稿の編集リンクが表示される' do
-        expect(page).to have_link '投稿を編集する', href: edit_public_book_path(book)
+        expect(page).to have_link 'ルームを編集する', href: edit_public_book_path(book)
       end
     end
   end

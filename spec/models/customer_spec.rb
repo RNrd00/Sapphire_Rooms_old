@@ -52,5 +52,75 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
         expect(Customer.reflect_on_association(:books).macro).to eq :has_many
       end
     end
+    context 'BookCommentモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:book_comments).macro).to eq :has_many
+      end
+    end
+    context 'Ratingモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:ratings).macro).to eq :has_many
+      end
+    end
+    context 'Favoriteモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:favorites).macro).to eq :has_many
+      end
+    end
+    context 'GroupCustomerモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:group_customers).macro).to eq :has_many
+      end
+    end
+    context 'CustomerRoomモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:customer_rooms).macro).to eq :has_many
+      end
+    end
+    context 'Chatモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:chats).macro).to eq :has_many
+      end
+    end
+    context 'Roomモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:rooms).macro).to eq :has_many
+      end
+    end
+    context 'ViewCountモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:view_counts).macro).to eq :has_many
+      end
+    end
+    context 'ReverseOfRelationshipモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:reverse_of_relationships).macro).to eq :has_many
+      end
+    end
+    context 'Followerモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:followers).macro).to eq :has_many
+      end
+    end
+    context 'Relationshipモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:relationships).macro).to eq :has_many
+      end
+    end
+    context 'Followingモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:followings).macro).to eq :has_many
+      end
+    end
+    context 'ActiveNotificationモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:active_notifications).macro).to eq :has_many
+      end
+    end
+    context 'PassiveNotificationモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Customer.reflect_on_association(:passive_notifications).macro).to eq :has_many
+      end
+    end
   end
 end

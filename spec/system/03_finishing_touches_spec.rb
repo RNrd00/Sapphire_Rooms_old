@@ -53,7 +53,7 @@ describe '[STEP3] 仕上げのテスト' do
       fill_in 'book[name]', with: Faker::Lorem.characters(number: 5)
       fill_in 'book[introduce]', with: Faker::Lorem.characters(number: 20)
       fill_in 'book[delete_key]', with: Faker::Lorem.characters(number: 5)
-      click_button 'コメント投稿'
+      click_button 'ルーム作成'
       is_expected.to have_content '投稿に成功しました！'
     end
     it '投稿データの更新成功時' do
@@ -98,10 +98,10 @@ describe '[STEP3] 仕上げのテスト' do
       end
 
       it '投稿が保存されない' do
-        expect { click_button 'コメント投稿' }.not_to change(Book.all, :count)
+        expect { click_button 'ルーム作成' }.not_to change(Book.all, :count)
       end
       it '投稿一覧画面を表示している' do
-        click_button 'コメント投稿'
+        click_button 'ルーム作成'
         expect(current_path).to eq '/public/books'
         expect(page).to have_content book.introduce
         expect(page).to have_content other_book.introduce
@@ -111,7 +111,7 @@ describe '[STEP3] 仕上げのテスト' do
         expect(page).to have_field 'book[introduce]', with: @introduce
       end
       it 'バリデーションエラーが表示される' do
-        click_button 'コメント投稿'
+        click_button 'ルーム作成'
         expect(page).to have_content "can't be blank"
       end
     end
@@ -179,8 +179,8 @@ describe '[STEP3] 仕上げのテスト' do
         it 'URLが正しい' do
           expect(current_path).to eq '/public/books/' + other_book.id.to_s
         end
-        it '「コメント詳細ページ」と表示される' do
-          expect(page).to have_content 'コメント詳細ページ'
+        it '「ルームページ」と表示される' do
+          expect(page).to have_content 'ルームページ'
         end
         it '投稿のnameが表示される' do
           expect(page).to have_content other_book.name

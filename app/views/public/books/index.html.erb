@@ -4,11 +4,11 @@
         <%= render "layouts/errors", obj: @book %>
     </div>
     <div class="row">
-        <h1>フリー投稿画面</h1>
+        <h1>ルーム作成画面</h1>
     </div>
     <div class="row">
-        <p>ここでは自由にお話する事が出来ます。</p>
-        <p>フリートークとしてお使いください。</p>
+        <p>ここはルーム作成部屋です。</p>
+        <p>自分の好きな話題について語り合えるルームを作りましょう！</p>
     </div>
     <div class="row">
         <div class="col-sm-10">
@@ -17,14 +17,14 @@
         <ul>
             <h3><li>中傷発言はお止めください</li></h3><br>
             <h3><li>公序良俗に反する発言は厳禁です</li></h3><br>
-            <h3><li>適切なモラルを遵守した投稿をお願い致します</li></h3>
+            <h3><li>適切なモラルを遵守したルーム作成をお願い致します</li></h3>
         </ul>
         </div>
     </div>
     <br>
     <div class="row">
         <div class="col-sm-6">
-            <h1>フリートーク</h1>
+            <h1>ルーム作成</h1>
         </div>
     </div>
     <% unless admin_signed_in? %>
@@ -35,10 +35,10 @@
             </div>
         </div>
         <% else %>
-                <h3 class="text-warning">ゲストユーザーなので投稿機能は使用できません。ログインしてください。</h3>
+                <h3 class="text-warning">ゲストユーザーなのでルーム作成機能は使用できません。ログインしてください。</h3>
         <% end %>
     <% end %>
     <br>
-    <h1>コメント欄</h1>
+    <h1>ルーム一覧</h1>
     <%= render 'public/books/index', books: @books %>
 </div>

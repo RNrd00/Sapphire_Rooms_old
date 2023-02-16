@@ -1,11 +1,11 @@
 <div class="container jQuery_aplly">
-    <h1>コメント詳細ページ</h1>
+    <h1>ルームページ</h1>
     <div class="row">
     <div class="col-sm-12">
     <div class="border border-success">
         <br>
         <div class="d-flex justify-content-around">
-            <div class="border border-5 border-dark">ユーザー名:<%= @book.name %></div>
+            <div class="border border-5 border-dark">タイトル:<%= @book.name %></div>
             <div class="border border-5 border-dark">投稿者のID:<%= @book.customer_id %></div>
         </div>
         <br>
@@ -15,6 +15,7 @@
             <% end %>
         </div>
         <br>
+        <h3 style="color: #33ABD9;">ルーム説明</h2>
         <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
             <h4><%= safe_join(@book.introduce.split("\n"),tag(:br)) %></h4>
         </div>
@@ -28,7 +29,7 @@
         </div>
         <div class="view-count">閲覧数: <%= @book.view_counts.count %></div>
         <% if !current_page?(public_book_path(@book.id)) %>
-            <%= link_to "コメント詳細ページ", public_book_path(@book.id), method: :get, class:'btn btn-success' %>
+            <%= link_to "ルーム詳細ページ", public_book_path(@book.id), method: :get, class:'btn btn-success' %>
         <% end %>
         </div>
     </div>
@@ -40,8 +41,8 @@
                 <br>
                 <%= text_field_tag :key, @word, placeholder: '削除パスワード(1~100の文字か数字)', class:'w-50' %><br>
                 <br>
-                <%= submit_tag '投稿を削除する', data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger' %>
-                <%= link_to '投稿を編集する', edit_public_book_path(@book), class: "btn btn-primary edit_public_book_#{@book.id}" %>
+                <%= submit_tag 'ルームを削除する', data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger' %>
+                <%= link_to 'ルームを編集する', edit_public_book_path(@book), class: "btn btn-primary edit_public_book_#{@book.id}" %>
             <% end %>
         <% end %>
         </div>

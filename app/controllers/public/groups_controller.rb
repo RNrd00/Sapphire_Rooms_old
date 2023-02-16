@@ -1,7 +1,8 @@
 class Public::GroupsController < ApplicationController
     before_action :ensure_correct_customer, only: [:edit, :update]
-    before_action :authenticate_customer!
     before_action :move_to_sign_in, expect: [:index, :show, :edit, :update, :new, :create]
+    before_action :move_to_admin_in, only: [:new, :edit]
+    before_action :ensure_guest_customer, only: [:new, :index, :show, :edit]
 
     def new
         @group = Group.new
@@ -50,10 +51,24 @@ class Public::GroupsController < ApplicationController
             redirect_to public_groups_path
         end
     end
+    
+    def ensure_guest_customer
+        unless admin_signed_in?
+            if current_customer.name == "guestuser"
+                redirect_to public_customer_path(current_customer), notice:'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+            end
+        end
+    end
 
   def move_to_sign_in
       unless customer_signed_in? || admin_signed_in?
           redirect_to new_customer_session_path
+      end
+  end
+
+  def move_to_admin_in
+      if admin_signed_in?
+          redirect_to public_customers_path
       end
   end
 end

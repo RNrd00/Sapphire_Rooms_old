@@ -80,7 +80,11 @@ class Public::CustomersController < ApplicationController
     def ensure_correct_customer
         @customer = Customer.find(params[:id])
         unless @customer == current_customer
-            redirect_to public_customer_path(current_customer)
+            if admin_signed_in?
+                redirect_to root_path
+            else
+                redirect_to public_customer_path(current_customer), notice: '他のユーザーの編集ページには遷移出来ません'
+            end
         end
     end
 

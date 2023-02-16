@@ -1,36 +1,71 @@
 <div class="row">
     <div class="col-sm-12">
         <% books.each do |book| %>
-        <% if book.customer.released? %>
-        <div class="border border-success mb-5">
-        <br>
-        <div class="d-flex justify-content-around">
-            <div class="border border-5 border-dark">ユーザー名:<%= book.name %></div>
-            <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
-            <div class="border border-5 border-dark">
-                <% book.tags.each { |tag| %><li style="list-style: none;">タグ:<%= link_to tag.name, public_search_path(content: tag.name, model: "book_tag", method: "perfect") %></li><% } %>
-            </div>
-        </div>
-        <br>
-        <div>
-            <%= link_to public_customer_path(book.customer) do %>
-                <%= image_tag book.customer.get_profile_image, size:'100x100' %>
+            <% unless admin_signed_in? %>
+                <% if book.customer.released? || current_customer.nonreleased? || current_customer.name == "guestuser" %>
+                <div class="border border-success mb-5">
+                <br>
+                <div class="d-flex justify-content-around">
+                    <div class="border border-5 border-dark">タイトル:<%= book.name %></div>
+                    <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
+                    <div class="border border-5 border-dark">
+                        <% book.tags.each { |tag| %><li style="list-style: none;">タグ:<%= link_to tag.name, public_search_path(content: tag.name, model: "book_tag", method: "perfect") %></li><% } %>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <%= link_to public_customer_path(book.customer) do %>
+                        <%= image_tag book.customer.get_profile_image, size:'100x100' %>
+                    <% end %>
+                </div>
+                <br>
+                <h3 style="color: #33ABD9;">ルーム説明</h2>
+                <div class="col-sm-12 border border-5 border-primary rounded mx-left">
+                    <h4><%= safe_join(book.introduce.split("\n"),tag(:br)) %></h4>
+                </div>
+                <% if !admin_signed_in? %>
+                    <div class=<%= "favorite-" + book.id.to_s %> >
+                        <%= render 'public/favorites/btn', book: book %>
+                    </div> 
+                <% end %>
+                <% if !current_page?(public_book_path(book.id)) %>
+                    <div class="text-center"><%= link_to "入室する", public_book_path(book.id), method: :get, class:'btn btn-success' %></div>
+                <% end %>
+                </div>
+                <% end %>
             <% end %>
-        </div>
-        <br>
-        <div class="col-sm-12 border border-5 border-primary rounded mx-left">
-            <h4><%= safe_join(book.introduce.split("\n"),tag(:br)) %></h4>
-        </div>
-        <% if !admin_signed_in? %>
-            <div class=<%= "favorite-" + book.id.to_s %> >
-                <%= render 'public/favorites/btn', book: book %>
-            </div> 
-        <% end %>
-        <% if !current_page?(public_book_path(book.id)) %>
-            <%= link_to "コメント詳細ページ", public_book_path(book.id), method: :get, class:'btn btn-success' %>
-        <% end %>
-        </div>
-        <% end %>
+
+            <% if admin_signed_in? %>
+                <div class="border border-success mb-5">
+                <br>
+                <div class="d-flex justify-content-around">
+                    <div class="border border-5 border-dark">タイトル:<%= book.name %></div>
+                    <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
+                    <div class="border border-5 border-dark">
+                        <% book.tags.each { |tag| %><li style="list-style: none;">タグ:<%= link_to tag.name, public_search_path(content: tag.name, model: "book_tag", method: "perfect") %></li><% } %>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <%= link_to public_customer_path(book.customer) do %>
+                        <%= image_tag book.customer.get_profile_image, size:'100x100' %>
+                    <% end %>
+                </div>
+                <br>
+                <h3 style="color: #33ABD9;">ルーム説明</h2>
+                <div class="col-sm-12 border border-5 border-primary rounded mx-left">
+                    <h4><%= safe_join(book.introduce.split("\n"),tag(:br)) %></h4>
+                </div>
+                <% if !admin_signed_in? %>
+                    <div class=<%= "favorite-" + book.id.to_s %> >
+                        <%= render 'public/favorites/btn', book: book %>
+                    </div> 
+                <% end %>
+                <% if !current_page?(public_book_path(book.id)) %>
+                    <div class="text-center"><%= link_to "入室する", public_book_path(book.id), method: :get, class:'btn btn-success' %></div>
+                <% end %>
+                </div>
+                <% end %>
         <% end %>
         <%= paginate books %>
     </div>

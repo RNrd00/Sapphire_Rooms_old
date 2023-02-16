@@ -4,14 +4,14 @@
             <div class="errors">
                 <%= render "layouts/errors", obj: @book %>
             </div>
-            <h1>コメント編集画面</h1>
+            <h1>ルーム編集画面</h1>
             <%= form_with model: @book, method: :patch, url: public_book_path do |f| %>
                 <%= f.label '貴方の名前:' %>
                 <%= f.text_field :name, class:'w-25' %>
                 <%= f.label '削除パスワード(1~100の文字か数字)' %>
                 <%= f.text_field :delete_key, :size => "/\A\w{1,100}\z/i", class:'w-25' %><br>
                 <br>
-                <%= f.label 'コメント' %>
+                <%= f.label 'ルーム説明' %>
                 <%= f.text_area :introduce, class:'form-control w-100', rows:'5' %>
                 <br>
                 <%= f.submit '編集完了', class:'btn btn-success' %>

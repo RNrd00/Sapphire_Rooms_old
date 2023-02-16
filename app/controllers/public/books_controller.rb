@@ -87,15 +87,15 @@ class Public::BooksController < ApplicationController
   end
 
   def ensure_guest_customer
-    @customer = Customer.find(params[:id])
-    if @customer.name == "guestuser"
+    @book = Book.find(params[:id])
+    if @book.customer.name == "guestuser"
         redirect_to public_books_path, notice:'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
 
   def ensure_correct_customer
-    @customer = Customer.find(params[:id])
-    unless @customer == current_customer
+    @book = Book.find(params[:id])
+    unless @book.customer == current_customer
         redirect_to public_books_path
     end
   end

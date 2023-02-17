@@ -20,7 +20,9 @@
                 <% end %>
                 <% unless @customer == current_customer %>
                     <% if @customer.released? %>
+                     <% if current_customer.name != "guestuser" %>
                       <%= link_to 'ブロックする', public_customer_nonrelease_path(@customer), method: :patch, class:'btn btn-danger' %>
+                     <% end %>
                     <% else %>
                       <%= link_to 'ブロック解除', public_customer_release_path(@customer), method: :patch, class:'btn btn-success' %>
                     <% end %>

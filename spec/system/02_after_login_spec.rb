@@ -3,7 +3,7 @@ require 'rails_helper'
 describe '[STEP2] ユーザログイン後のテスト' do
   let(:customer) { create(:customer) }
   let!(:other_customer) { create(:customer) }
-  let!(:book) { create(:book, customer: customer) }
+  let!(:book) { create(:book, customer:) }
   let!(:other_book) { create(:book, customer: other_customer) }
 
   before do
@@ -52,8 +52,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link '', href: public_customer_path(other_book.customer)
       end
       it '自分の投稿と他人の投稿のタイトルのリンク先がそれぞれ正しい' do
-        expect(page).to have_link "入室する", href: public_book_path(book.id)
-        expect(page).to have_link "入室する", href: public_book_path(other_book.id)
+        expect(page).to have_link '入室する', href: public_book_path(book.id)
+        expect(page).to have_link '入室する', href: public_book_path(other_book.id)
       end
       it '自分の投稿と他人の投稿のオピニオンが表示される' do
         expect(page).to have_content book.introduce

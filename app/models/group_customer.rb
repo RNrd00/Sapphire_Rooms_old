@@ -1,4 +1,4 @@
 class GroupCustomer < ApplicationRecord
-    belongs_to :group
-    belongs_to :customer
+  belongs_to :group
+  belongs_to :customer
 end

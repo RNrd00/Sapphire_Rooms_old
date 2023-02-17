@@ -1,14 +1,13 @@
 class EventMailer < ApplicationMailer
-
   def send_notification(member, event)
     @group = event[:group]
     @name = event[:name]
     @introduction = event[:introduction]
 
-    @mail = EventMailer.new()
+    @mail = EventMailer.new
     mail(
       from: ENV['MAIL_ADDRESS'],
-      to:   member.email,
+      to: member.email,
       subject: 'New Event Notice!!'
     )
   end
@@ -19,5 +18,4 @@ class EventMailer < ApplicationMailer
       EventMailer.send_notification(member, event).deliver_now
     end
   end
-
 end

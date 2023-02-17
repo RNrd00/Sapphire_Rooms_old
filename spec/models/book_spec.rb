@@ -28,15 +28,15 @@ RSpec.describe 'Bookモデルのテスト', type: :model do
         is_expected.to eq false
       end
       it '10000文字以下であること: 10000文字は〇' do
-        book.introduce = Faker::Lorem.characters(number: 10000)
+        book.introduce = Faker::Lorem.characters(number: 10_000)
         is_expected.to eq true
       end
       it '10000文字以下であること: 10001文字は×' do
-        book.introduce = Faker::Lorem.characters(number: 10001)
+        book.introduce = Faker::Lorem.characters(number: 10_001)
         is_expected.to eq false
       end
     end
-    
+
     context 'delete_keyカラム' do
       it '空欄でないこと' do
         book.delete_key = ''

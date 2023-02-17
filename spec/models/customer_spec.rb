@@ -36,11 +36,11 @@ RSpec.describe 'Customerモデルのテスト', type: :model do
 
     context 'introduceカラム' do
       it '10000文字以下であること: 10000文字は〇' do
-        customer.introduce = Faker::Lorem.characters(number: 10000)
+        customer.introduce = Faker::Lorem.characters(number: 10_000)
         is_expected.to eq true
       end
       it '10000文字以下であること: 100001文字は×' do
-        customer.introduce = Faker::Lorem.characters(number: 10001)
+        customer.introduce = Faker::Lorem.characters(number: 10_001)
         is_expected.to eq false
       end
     end

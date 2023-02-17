@@ -66,7 +66,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
 
     context 'リンクの内容を確認' do
       subject { current_path }
-      
+
       it 'SapphireRoomsを押すと、トップ画面に遷移する' do
         root_link = find_all('a')[0].text
         root_link = root_link.delete(' ')
@@ -237,8 +237,16 @@ describe '[STEP1] ユーザログイン前のテスト' do
         logout_link = find_all('a')[5].text
         expect(logout_link).to match(/通知/)
       end
-      it 'ログアウトリンクが表示される: 左上から6番目のリンクが「ログアウト」である' do
+      it 'ログアウトリンクが表示される: 左上から6番目のリンクが「グループ一覧」である' do
         logout_link = find_all('a')[6].text
+        expect(logout_link).to match(/グループ一覧/)
+      end
+      it 'ログアウトリンクが表示される: 左上から7番目のリンクが「グループ作成」である' do
+        logout_link = find_all('a')[7].text
+        expect(logout_link).to match(/グループ作成/)
+      end
+      it 'ログアウトリンクが表示される: 左上から8番目のリンクが「ログアウト」である' do
+        logout_link = find_all('a')[8].text
         expect(logout_link).to match(/ログアウト/)
       end
     end
@@ -252,7 +260,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[6].text
+      logout_link = find_all('a')[8].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
     end

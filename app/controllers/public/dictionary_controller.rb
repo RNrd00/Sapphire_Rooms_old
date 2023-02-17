@@ -1,6 +1,3 @@
 class Public::DictionaryController < ApplicationController
-
-    def index
-    end
-
+  def index; end
 end

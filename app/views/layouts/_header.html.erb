@@ -42,6 +42,13 @@
                   <i class="fas fa-object-group"></i> グループ作成
                 <%end%>
               </li>
+              <% if current_customer.name != "guestuser" %>
+              <li>
+                <%= link_to public_customer_unsubscribe_path(current_customer), method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-users-slash"></i> 退会する
+                <%end%>
+              </li>
+              <%end%>
               <li>
                 <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
                   <i class="fas fa-sign-out-alt"></i> ログアウト

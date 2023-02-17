@@ -3,7 +3,7 @@ require 'rails_helper'
 describe '[STEP3] 仕上げのテスト' do
   let(:customer) { create(:customer) }
   let!(:other_customer) { create(:customer) }
-  let!(:book) { create(:book, customer: customer) }
+  let!(:book) { create(:book, customer:) }
   let!(:other_book) { create(:book, customer: other_customer) }
 
   describe 'サクセスメッセージのテスト' do
@@ -30,7 +30,7 @@ describe '[STEP3] 仕上げのテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[6].text
+      logout_link = find_all('a')[8].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
       is_expected.to have_content 'successfully'
@@ -82,7 +82,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
       it 'バリデーションエラーが表示される' do
         click_button '新規登録'
-        expect(page).to have_content "Name is too short (minimum is 1 character)"
+        expect(page).to have_content 'Name is too short (minimum is 1 character)'
       end
     end
 

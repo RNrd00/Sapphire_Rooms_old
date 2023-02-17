@@ -15,7 +15,7 @@ class Public::RatingsController < ApplicationController
       @rating.save_tags(tag_list)
       redirect_to request.referer, notice: 'レビューを投稿しました！'
     else
-      @ratings = Rating.all
+      @ratings = Rating.page(params[:page]).order(params[:sort])
       render 'index'
     end
   end

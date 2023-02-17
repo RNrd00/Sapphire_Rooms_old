@@ -1,10 +1,10 @@
 <div class="container">
   <i id="notice" style="font-size: 20px; font-family: Georgia, serif;"><%= notice %></i>
   <div class="row">
-    <div class="mx-auto" style="padding: 100px 0 100px 0;">
+    <div class="mx-auto" style="padding: 100px 50px; border: 4mm ridge rgba(62, 117, 161, .6); background-color: #38FFA3;">
     <h2>ログイン</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_with model: @customer, url: customer_session_path do |f| %>
 <%= render "public/shared/error_messages", resource: resource %>
   <div class="field">
     <%= f.label 'メールアドレス' %><br />

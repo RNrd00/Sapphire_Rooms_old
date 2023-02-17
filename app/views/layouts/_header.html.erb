@@ -1,4 +1,4 @@
-      <nav class="navbar navbar-expand-lg navbar-light bg-info p-5">
+      <nav class="navbar navbar-expand-lg navbar-light bg-info p-4">
         <div class="container">
           <a class="navbar-brand text-light" href="/"><i class="fas fa-hotel"></i> <span>SapphireRooms</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-lavel="Toggle navigation">
@@ -50,6 +50,11 @@
               </li>
               <%end%>
               <li>
+                <%= link_to public_dictionaries_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-book"></i> 辞典
+                <%end%>
+              </li>
+              <li>
                 <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
                   <i class="fas fa-sign-out-alt"></i> ログアウト
                 <%end%>
@@ -88,6 +93,11 @@
                 <%end%>
               </li>
               <li>
+                <%= link_to public_dictionaries_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-book"></i> 辞典
+                <%end%>
+              </li>
+              <li>
                 <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
                   <i class="fas fa-sign-out-alt"></i> ログアウト
                 <%end%>
@@ -103,6 +113,11 @@
               <li>
                 <%= link_to public_home_about_path, class: 'nav-link text-light' do %>
                   <i class="fas fa-store"></i> サイト紹介
+                <%end%>
+              </li>
+              <li>
+                <%= link_to public_dictionaries_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-book"></i> 辞典
                 <%end%>
               </li>
               <li>

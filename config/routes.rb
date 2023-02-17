@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     resources :chats, only: %i[show create]
     resources :ratings, only: %i[index create destroy]
     resources :notifications, only: [:index]
-    resources :dictionary, only: [:index]
+    resources :dictionaries, only: [:index] do
+      collection do
+        get :sns
+      end
+    end
   end
 
   scope module: :public do

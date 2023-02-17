@@ -169,7 +169,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it 'passwordフォームが表示される' do
         expect(page).to have_field 'customer[password]'
       end
-      it 'Log inボタンが表示される' do
+      it 'ログインボタンが表示される' do
         expect(page).to have_button 'ログイン'
       end
       it 'nameフォームは表示されない' do
@@ -184,7 +184,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
         click_button 'ログイン'
       end
 
-      it 'ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている' do
+      it 'ログイン後のリダイレクト先が、ホームページなっている' do
         expect(current_path).to eq '/'
       end
     end
@@ -245,8 +245,12 @@ describe '[STEP1] ユーザログイン前のテスト' do
         logout_link = find_all('a')[7].text
         expect(logout_link).to match(/グループ作成/)
       end
-      it 'ログアウトリンクが表示される: 左上から8番目のリンクが「ログアウト」である' do
+      it 'ログアウトリンクが表示される: 左上から8番目のリンクが「退会する」である' do
         logout_link = find_all('a')[8].text
+        expect(logout_link).to match(/退会する/)
+      end
+      it 'ログアウトリンクが表示される: 左上から9番目のリンクが「ログアウト」である' do
+        logout_link = find_all('a')[9].text
         expect(logout_link).to match(/ログアウト/)
       end
     end
@@ -260,7 +264,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[8].text
+      logout_link = find_all('a')[9].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
     end

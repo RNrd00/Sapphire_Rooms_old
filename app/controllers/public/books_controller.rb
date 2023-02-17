@@ -1,8 +1,8 @@
 class Public::BooksController < ApplicationController
+  before_action :exist_book?, only: %i[show edit update destroy]
   before_action :move_to_sign_in, expect: %i[index show edit update create destroy]
   before_action :ensure_correct_customer, only: %i[edit update]
   before_action :ensure_guest_customer, only: [:edit]
-  before_action :exist_book?, only: %i[show edit update destroy]
 
   def index
     to = Time.current.at_end_of_day
@@ -35,7 +35,7 @@ class Public::BooksController < ApplicationController
     tag_list = params[:book][:tag_name].split(',')
     if @book.save
       @book.save_tags(tag_list)
-      redirect_to public_book_path(@book), notice: '投稿に成功しました！'
+      redirect_to public_book_path(@book), notice: 'ルーム作成に成功しました！'
     else
       @books = Book.page(params[:page])
       @customer = current_customer
@@ -47,7 +47,7 @@ class Public::BooksController < ApplicationController
     @book = Book.find(params[:id])
     if @book.delete_key == params[:key]
       @book.destroy
-      redirect_to public_books_path, notice: '投稿を削除しました'
+      redirect_to public_books_path, notice: 'ルームを削除しました'
     else
       flash[:notice] = '削除パスワードが違います'
       @customer = current_customer

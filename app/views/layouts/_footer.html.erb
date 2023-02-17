@@ -1,14 +1,15 @@
 <div class="position-relative">
-<div class="navbar navbar-expand-lg navbar-light bg-info text-light position-absolute bottom-0 w-100 bg-dark pt-5 pb-4">
+<div class="navbar navbar-expand-lg navbar-expand-md navbar-expand-sm navbar-light bg-info text-light position-absolute bottom-0 w-100 bg-dark">
     <div class="container d-flex flex-column">
         <div class="row">
-            <div class="col-md-12 mx-auto">
+            <div class="col-lg-12 col-md-12 col-sm-12">
                 <h1>CopyRight ■■■■■■■■■</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 mx-auto">
-            <ul class="navbar-nav">
+            <div class="col-sm-12">
+            <h2 style="text-align: center;">シェアしませんか？</h2>
+            <ul class="navbar-nav" style="text-align: center;">
                 <li>
                 <%=link_to 'https://twitter.com/?lang=ja', class: 'nav-link text-light' do%>
                     <i class="fab fa-twitter display-2"></i>
@@ -24,9 +25,14 @@
                     <i class="fab fa-facebook display-2"></i>
                 <%end%>
                 </li>
+                <li>
+                <%=link_to 'https://line.me/ja/', class: 'nav-link text-light' do%>
+                    <i class="fab fa-line display-2"></i>
+                <%end%>
+                </li>
             </ul>
             </div>
         </div>
     </div> 
 </div>
-</div>
+</div

@@ -14,7 +14,7 @@
                 <td><%= link_to group.name, public_group_path(group), class: "group_#{group.id}" %></td>
                 <td><%= group.group_customers.count %></td>
                 <% if group.is_owner_by?(current_customer) %>
-                    <td><%= link_to 'Edit', edit_public_group_path(group), class: "group_#{group.id}" %></td>
+                    <td><%= link_to '編集', edit_public_group_path(group), class: "group_#{group.id}" %></td>
                 <% end %>
             </tr>
         <% end %>

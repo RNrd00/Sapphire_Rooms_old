@@ -1,9 +1,9 @@
 class Public::CustomersController < ApplicationController
+  before_action :exist_customer?, only: %i[show edit update destroy]
   before_action :move_to_sign_in, expect: %i[index show edit update like]
   before_action :ensure_correct_customer, only: %i[edit update]
   before_action :ensure_guest_customer, only: [:edit, :unsubscribe, :withdrawal]
   before_action :set_customer, only: [:likes]
-  before_action :exist_customer?, only: %i[show edit update destroy]
 
   def index
     @customer = Customer.page(params[:page])
@@ -58,8 +58,8 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdrawal
-    @customer = Customer.find(params[:customer_id])
-    @customer.update(is_deleted: true)
+    @customer = current_customer
+    @customer.update(is_active: false)
     reset_session
     redirect_to root_path, notice: '退会処理を実行いたしました'
   end
@@ -69,15 +69,15 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name, :introduce, :profile_image)
   end
-
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
-
+  
   def exist_customer?
     return if Customer.find_by(id: params[:id])
 
     redirect_to root_path, notice: '申し訳ございませんが、そのページは削除されているか元から存在しません。'
+  end
+
+  def set_customer
+    @customer = Customer.find(params[:id])
   end
 
   def ensure_correct_customer
@@ -92,8 +92,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def ensure_guest_customer
-    @customer = Customer.find(params[:customer_id])
-    return unless @customer.name == 'guestuser'
+    return unless current_customer.name == 'guestuser'
 
     redirect_to public_customer_path(current_customer), notice: 'ゲストユーザーはプロフィール編集画面や退会画面へは遷移できません。'
   end

@@ -55,6 +55,8 @@ class Customer < ApplicationRecord
     end
   end
 
+  scope :only_active, -> { where(is_active: true) }
+
   def create_notification_follow!(current_customer)
     temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_customer.id, id, 'follow'])
     return unless temp.blank?
@@ -64,10 +66,6 @@ class Customer < ApplicationRecord
       action: 'follow'
     )
     notification.save if notification.valid?
-  end
-
-  def active_for_authentication?
-    super && (is_deleted == false)
   end
 
   def self.guest

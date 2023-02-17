@@ -30,7 +30,7 @@ describe '[STEP3] 仕上げのテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[8].text
+      logout_link = find_all('a')[9].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
       is_expected.to have_content 'successfully'

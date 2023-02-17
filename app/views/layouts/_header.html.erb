@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto" style="flex-wrap: wrap;">
               <%if customer_signed_in?%>
               <li>
                 <%= link_to public_customer_path(current_customer), method: :get, class: 'nav-link text-light' do %>

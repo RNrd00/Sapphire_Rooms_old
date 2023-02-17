@@ -1,7 +1,9 @@
 <div class="container">
-  <%= flash[:notice] %>
   <div class="row bg-success text-light">
     <div class="col-lg-12 col-md-7 col-sm-10 mx-auto">
+      <% if !customer_signed_in? %>
+       <i id="notice" style="font-size: 20px; font-family: Georgia, serif;"><%= notice %></i>
+      <% end %>
       <h1>ようこそ</h1>
       <p>このサイトはSNSサイトです。</p>
       <p>自分が話したい話題について話し合うルームを自由に作成することが出来ます。</p>

@@ -1,6 +1,6 @@
 class Public::RatingsController < ApplicationController
-  before_action :move_to_sign_in, expect: [:index]
   before_action :exist_rating?, only: [:destroy]
+  before_action :move_to_sign_in, expect: [:index]
 
   def index
     @ratings = Rating.page(params[:page]).order(params[:sort])

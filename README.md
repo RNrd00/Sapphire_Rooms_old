@@ -23,7 +23,6 @@ SNSサイトは数多く存在しますが、特定の趣味に特化し尚且�
 
 ## 設計書
 
-
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL

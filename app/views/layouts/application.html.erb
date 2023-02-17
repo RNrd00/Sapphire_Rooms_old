@@ -15,6 +15,7 @@
     </header>
     <main>
       <% if customer_signed_in? %>
+      <i id="notice" style="font-size: 20px; font-family: Georgia, serif;"><%= notice %></i>
       <div class="d-flex justify-content-center mb-2 jQuery_aplly">
         <div class="mr-3"><%= render 'public/searches/form' %></div>
         <div class="mr-3"><%= render 'public/searches/tag_form' %></div>

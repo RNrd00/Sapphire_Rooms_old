@@ -45,6 +45,9 @@
                 <%= link_to 'ルームを編集する', edit_public_book_path(@book), class: "btn btn-primary edit_public_book_#{@book.id}" %>
             <% end %>
         <% end %>
+        <% if admin_signed_in? %>
+         <%= link_to '管理者用ルーム削除', public_book_path(@book), data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger', method: :delete %>
+        <% end %>
         </div>
     </div>
     <br>

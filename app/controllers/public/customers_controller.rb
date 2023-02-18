@@ -58,7 +58,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def withdrawal
-    @customer = current_customer
+    if admin_signed_in?
+     @customer = Customer.find(params[:customer_id])
+    else
+     @customer = current_customer
+    end
     @customer.update(is_active: false)
     reset_session
     redirect_to root_path, notice: '退会処理を実行いたしました'
@@ -69,7 +73,7 @@ class Public::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name, :introduce, :profile_image)
   end
-  
+
   def exist_customer?
     return if Customer.find_by(id: params[:id])
 
@@ -92,9 +96,11 @@ class Public::CustomersController < ApplicationController
   end
 
   def ensure_guest_customer
+   if !admin_signed_in?
     return unless current_customer.name == 'guestuser'
 
     redirect_to public_customer_path(current_customer), notice: 'ゲストユーザーはプロフィール編集画面や退会画面へは遷移できません。'
+   end
   end
 
   def move_to_sign_in

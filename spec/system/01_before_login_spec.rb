@@ -46,20 +46,24 @@ describe '[STEP1] ユーザログイン前のテスト' do
         about_link = find_all('a')[2].text
         expect(about_link).to match(/サイト紹介/)
       end
-      it '会員登録リンクが表示される: 左上から4番目のリンクが「会員登録」である' do
+      it '会員登録リンクが表示される: 左上から4番目のリンクが「辞典」である' do
         signup_link = find_all('a')[3].text
+        expect(signup_link).to match(/辞典/)
+      end
+      it '会員登録リンクが表示される: 左上から4番目のリンクが「会員登録」である' do
+        signup_link = find_all('a')[4].text
         expect(signup_link).to match(/会員登録/)
       end
       it 'ログインリンクが表示される: 左上から5番目のリンクが「ログイン」である' do
-        login_link = find_all('a')[4].text
+        login_link = find_all('a')[5].text
         expect(login_link).to match(/ログイン/)
       end
       it 'ゲストログインリンクが表示される: 左上から6番目のリンクが「ゲストログイン」である' do
-        guestlogin_link = find_all('a')[5].text
+        guestlogin_link = find_all('a')[6].text
         expect(guestlogin_link).to match(/ゲストログイン/)
       end
       it '管理者ログインリンクが表示される: 左上から7番目のリンクが「管理者ログイン」である' do
-        admin_link = find_all('a')[6].text
+        admin_link = find_all('a')[7].text
         expect(admin_link).to match(/管理者ログイン/)
       end
     end
@@ -87,14 +91,20 @@ describe '[STEP1] ユーザログイン前のテスト' do
         click_link about_link
         is_expected.to eq '/public/home/about'
       end
+      it '辞典を押すと、辞典画面に遷移する' do
+        dictionary_link = find_all('a')[3].text
+        dictionary_link = dictionary_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link dictionary_link, match: :first
+        is_expected.to eq '/public/dictionaries'
+      end
       it '会員登録を押すと、新規登録画面に遷移する' do
-        signup_link = find_all('a')[3].text
+        signup_link = find_all('a')[4].text
         signup_link = signup_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link signup_link, match: :first
         is_expected.to eq '/customers/sign_up'
       end
       it 'ログインを押すと、ログイン画面に遷移する' do
-        login_link = find_all('a')[4].text
+        login_link = find_all('a')[5].text
         login_link = login_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link login_link, match: :first
         is_expected.to eq '/customers/sign_in'
@@ -249,8 +259,12 @@ describe '[STEP1] ユーザログイン前のテスト' do
         logout_link = find_all('a')[8].text
         expect(logout_link).to match(/退会する/)
       end
-      it 'ログアウトリンクが表示される: 左上から9番目のリンクが「ログアウト」である' do
+      it 'ログアウトリンクが表示される: 左上から9番目のリンクが「辞典」である' do
         logout_link = find_all('a')[9].text
+        expect(logout_link).to match(/辞典/)
+      end
+      it 'ログアウトリンクが表示される: 左上から10番目のリンクが「ログアウト」である' do
+        logout_link = find_all('a')[10].text
         expect(logout_link).to match(/ログアウト/)
       end
     end
@@ -264,7 +278,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       fill_in 'customer[email]', with: customer.email
       fill_in 'customer[password]', with: customer.password
       click_button 'ログイン'
-      logout_link = find_all('a')[9].text
+      logout_link = find_all('a')[10].text
       logout_link = logout_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
       click_link logout_link
     end

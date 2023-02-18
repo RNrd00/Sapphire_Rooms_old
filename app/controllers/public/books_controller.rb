@@ -45,7 +45,7 @@ class Public::BooksController < ApplicationController
 
   def destroy
     @book = Book.find(params[:id])
-    if @book.delete_key == params[:key]
+    if @book.delete_key == params[:key] || admin_signed_in?
       @book.destroy
       redirect_to public_books_path, notice: 'ルームを削除しました'
     else

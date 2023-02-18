@@ -61,10 +61,18 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
     end
 
-    context '投稿成功のテスト' do
+    context 'ルーム作成成功のテスト' do
       before do
         fill_in 'book[name]', with: Faker::Lorem.characters(number: 5)
         fill_in 'book[introduce]', with: Faker::Lorem.characters(number: 20)
+        fill_in 'book[delete_key]', with: Faker::Lorem.characters(number: 5)
+      end
+      it '自分の新しいルームが正しく保存される' do
+        expect { click_button 'ルーム作成' }.to change(customer.books, :count).by(1)
+      end
+      it 'リダイレクト先が、保存できたルームの詳細画面になっている' do
+        click_button 'ルーム作成'
+        expect(current_path).to eq '/public/books/' + Book.last.id.to_s
       end
     end
   end
@@ -91,6 +99,13 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(page).to have_link 'ルームを編集する', href: edit_public_book_path(book)
       end
     end
+
+    context '編集リンクのテスト' do
+      it '編集画面に遷移する' do
+        click_link 'ルームを編集する'
+        expect(current_path).to eq '/public/books/' + book.id.to_s + '/edit'
+      end
+    end
   end
 
   describe '自分の投稿編集画面のテスト' do
@@ -98,12 +113,53 @@ describe '[STEP2] ユーザログイン後のテスト' do
       visit edit_public_book_path(book)
     end
 
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/books/' + book.id.to_s + '/edit'
+      end
+      it '「ルーム編集画面」と表示される' do
+        expect(page).to have_content 'ルーム編集画面'
+      end
+      it 'name編集フォームが表示される' do
+        expect(page).to have_field 'book[name]', with: book.name
+      end
+      it 'introduce編集フォームが表示される' do
+        expect(page).to have_field 'book[introduce]', with: book.introduce
+      end
+      it '編集完了ボタンが表示される' do
+        expect(page).to have_button '編集完了'
+      end
+      it '詳細ページに戻るリンクが表示される' do
+        expect(page).to have_link '詳細ページに戻る', href: public_book_path(book)
+      end
+      it '一覧画面に戻るリンクが表示される' do
+        expect(page).to have_link '一覧画面に戻る', href: public_books_path
+      end
+    end
+
     context '編集成功のテスト' do
       before do
         @book_old_name = book.name
         @book_old_introduce = book.introduce
+        @book_old_delete_key = book.delete_key
         fill_in 'book[name]', with: Faker::Lorem.characters(number: 4)
         fill_in 'book[introduce]', with: Faker::Lorem.characters(number: 19)
+        fill_in 'book[delete_key]', with: Faker::Lorem.characters(number: 5)
+        click_button '編集完了'
+      end
+
+      it 'nameが正しく更新される' do
+        expect(book.reload.name).not_to eq @book_old_name
+      end
+      it 'introduceが正しく更新される' do
+        expect(book.reload.introduce).not_to eq @book_old_introduce
+      end
+      it 'delete_keyが正しく更新される' do
+        expect(book.reload.introduce).not_to eq @book_old_delete_key
+      end
+      it 'リダイレクト先が、更新した投稿の詳細画面になっている' do
+        expect(current_path).to eq '/public/books/' + book.id.to_s
+        expect(page).to have_content 'ルームページ'
       end
     end
   end

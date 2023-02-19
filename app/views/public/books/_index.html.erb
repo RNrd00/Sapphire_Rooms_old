@@ -3,7 +3,7 @@
         <% books.each do |book| %>
             <% unless admin_signed_in? %>
                 <% if book.customer.released? || current_customer.nonreleased? || current_customer.name == "guestuser" %>
-                <div class="border border-success mb-5">
+                <div class="mb-5" style="padding: 0.5em 1em; margin: 2em 0; color: #5989cf; background: #18F172; border-bottom: solid 6px #18C672; border-radius: 9px;">
                 <br>
                 <div class="d-flex justify-content-around">
                     <div class="border border-5 border-dark">タイトル:<%= book.name %></div>
@@ -36,7 +36,7 @@
             <% end %>
 
             <% if admin_signed_in? %>
-                <div class="border border-success mb-5">
+                <div class="mb-5" style="padding: 0.5em 1em; margin: 2em 0; color: #5989cf; background: #18F172; border-bottom: solid 6px #18C672; border-radius: 9px;">
                 <br>
                 <div class="d-flex justify-content-around">
                     <div class="border border-5 border-dark">タイトル:<%= book.name %></div>

@@ -12,16 +12,16 @@
     <%= f.text_field :tag_name, class: 'form-control rating_tag_name' %>
   </div>
   <% if rating.id === nil %>
-    <div class="form-group" id="star">
-      <%= f.label "レビュー" %>
-      <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
-    </div>
-    <div id="post_raty"></div>
+  <div class="form-group" id="star">
+    <%= f.label "レビュー" %>
+    <%= f.hidden_field :rate, id: :review_star, class:'form-control' %>
+  </div>
+<div id="post_raty"></div>
     <script>
       $(document).on('turbolinks:load', function() {
       let raty_elem = document.querySelector('#post_raty');
       raty_elem.innerHTML = ""
-      let option = {  
+      let option = {
           starOn: "<%= asset_path('star-on.png') %>",
           starOff: "<%= asset_path('star-off.png') %>",
           starHalf: "<%= asset_path('star-half.png') %>",

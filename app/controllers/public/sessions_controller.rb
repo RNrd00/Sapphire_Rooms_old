@@ -31,8 +31,6 @@ class Public::SessionsController < Devise::SessionsController
       if @customer.valid_password?(params[:customer][:password]) && !@customer.is_active
         redirect_to new_customer_session_path, notice: '退会済みか、追放されたユーザーです。御手数かけますが、新規登録し直してください。'
       end
-    else
-      redirect_to new_customer_session_path, notice: 'パスワードかメールアドレスが違います。'
     end
   end
 end

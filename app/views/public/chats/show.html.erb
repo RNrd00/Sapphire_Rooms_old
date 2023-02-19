@@ -15,6 +15,6 @@
 </div>
 
 <%= form_with model: @chat, data: {remote: true}, method: :post, url: public_chats_path do |f| %>
-    <%= f.text_field :message %>
+    <%= f.text_field :message, rows: '5' ,class: 'w-75 mb-2', placeholder: 'Enterでチャットを送信できます' %>
     <%= f.hidden_field :room_id %>
 <% end %>

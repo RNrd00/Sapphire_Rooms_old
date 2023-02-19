@@ -24,7 +24,7 @@ Rails.application.routes.draw do
         get :likes
       end
     end
-    resources :groups, only: %i[new index show create edit update] do
+    resources :groups, only: %i[new index show create edit update destroy] do
       resource :group_customers, only: %i[create destroy]
       resources :event_notices, only: %i[new create]
       get 'event_notices' => 'event_notices#sent'

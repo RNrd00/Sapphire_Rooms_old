@@ -1,9 +1,9 @@
 class Public::GroupsController < ApplicationController
   before_action :exist_group?, only: %i[show edit update destroy]
-  before_action :ensure_correct_customer, only: %i[edit update]
-  before_action :move_to_sign_in, expect: %i[index show edit update new create]
+  before_action :ensure_correct_customer, only: %i[edit update destroy]
+  before_action :move_to_sign_in, expect: %i[index show edit update new create destroy]
   before_action :move_to_admin_in, only: %i[new edit]
-  before_action :ensure_guest_customer, only: %i[create edit update]
+  before_action :ensure_guest_customer, only: %i[create edit update destroy]
 
   def new
     @group = Group.new
@@ -37,6 +37,11 @@ class Public::GroupsController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @group.destroy
+    redirect_to public_groups_path, notice: 'グループを削除しました'
   end
 
   private

@@ -13,8 +13,10 @@
                 <td><%= image_tag group.get_image, size: '50x50' %></td>
                 <td><%= link_to group.name, public_group_path(group), class: "group_#{group.id}" %></td>
                 <td><%= group.group_customers.count %></td>
-                <% if group.is_owner_by?(current_customer) %>
+                <% unless admin_signed_in? %>
+                 <% if group.is_owner_by?(current_customer) %>
                     <td><%= link_to '編集', edit_public_group_path(group), class: "group_#{group.id}" %></td>
+                 <% end %>
                 <% end %>
             </tr>
         <% end %>

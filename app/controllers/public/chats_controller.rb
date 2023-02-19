@@ -1,4 +1,5 @@
 class Public::ChatsController < ApplicationController
+  before_action :authenticate_customer!
   before_action :reject_non_related, only: [:show]
 
   def show

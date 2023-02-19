@@ -1,8 +1,9 @@
 class Public::GroupsController < ApplicationController
+  before_action :exist_group?, only: %i[show edit update destroy]
   before_action :ensure_correct_customer, only: %i[edit update]
   before_action :move_to_sign_in, expect: %i[index show edit update new create]
   before_action :move_to_admin_in, only: %i[new edit]
-  before_action :ensure_guest_customer, only: %i[new index show edit]
+  before_action :ensure_guest_customer, only: %i[create edit update]
 
   def new
     @group = Group.new
@@ -22,7 +23,7 @@ class Public::GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.owner_id = current_customer.id
     if @group.save
-      redirect_to public_groups_path
+      redirect_to public_groups_path, notice: 'グループを作成しました！'
     else
       render 'new'
     end
@@ -32,7 +33,7 @@ class Public::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to public_groups_path
+      redirect_to public_groups_path, notice: 'グループを編集しました！'
     else
       render 'edit'
     end
@@ -44,11 +45,19 @@ class Public::GroupsController < ApplicationController
     params.require(:group).permit(:name, :introduction, :image)
   end
 
-  def ensure_correct_customer
-    @group = Group.find(params[:id])
-    return if @group.owner_id == current_customer.id
+  def exist_group?
+    return if Group.find_by(id: params[:id])
 
-    redirect_to public_groups_path
+    redirect_to root_path, notice: '申し訳ございませんが、そのページは削除されているか元から存在しません。'
+  end
+
+  def ensure_correct_customer
+    unless admin_signed_in?
+     @group = Group.find(params[:id])
+     return if @group.owner_id == current_customer.id
+
+     redirect_to public_groups_path, notice: '他のユーザーへの編集画面へは遷移できません。'
+    end
   end
 
   def ensure_guest_customer

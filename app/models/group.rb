@@ -12,7 +12,7 @@ class Group < ApplicationRecord
   end
 
   def is_owner_by?(customer)
-    owner.id == customer.id
+     owner.id == customer.id
   end
 
   def includesCustomer?(customer)

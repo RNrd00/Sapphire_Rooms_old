@@ -235,9 +235,9 @@ describe '[STEP1] ユーザログイン前のテスト' do
         customers_link = find_all('a')[2].text
         expect(customers_link).to match(/会員一覧/)
       end
-      it '投稿リンクが表示される: 左上から4番目のリンクが「投稿」である' do
+      it '投稿リンクが表示される: 左上から4番目のリンクが「ルーム」である' do
         books_link = find_all('a')[3].text
-        expect(books_link).to match(/投稿/)
+        expect(books_link).to match(/ルーム/)
       end
       it 'レビューリンクが表示される: 左上から5番目のリンクが「レビュー」である' do
         rating_link = find_all('a')[4].text

@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :exist_customer?, only: %i[show edit update destroy]
+  before_action :exist_customer?, only: %i[show edit update destroy likes]
   before_action :move_to_sign_in, expect: %i[index show edit update like]
   before_action :ensure_correct_customer, only: %i[edit update]
   before_action :ensure_guest_customer, only: [:edit, :unsubscribe, :withdrawal]

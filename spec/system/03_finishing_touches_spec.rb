@@ -288,7 +288,7 @@ describe '[STEP3] 仕上げのテスト' do
         end
       end
     end
-    
+
       context '他人の投稿編集画面' do
        it '遷移できず、投稿一覧画面にリダイレクトされる' do
         visit edit_public_book_path(other_book)
@@ -328,7 +328,7 @@ describe '[STEP3] 仕上げのテスト' do
       end
     end
   end
-  
+
   describe 'グリッドシステムのテスト: container, row, col-sm-〇を正しく使えている' do
     subject { page }
 
@@ -396,11 +396,20 @@ describe '[STEP3] 仕上げのテスト' do
       it 'サイト紹介リンクのアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-store'
       end
+      it '辞典リンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-book'
+      end
       it '会員登録リンクのアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-user-plus'
       end
       it 'ログインリンクのアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-sign-in-alt'
+      end
+      it 'ゲストログインリンクのアイコンが表示される' do
+        is_expected.to have_selector '.fa.fa-user'
+      end
+      it '管理者ログインリンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-chess-king'
       end
     end
 
@@ -418,10 +427,28 @@ describe '[STEP3] 仕上げのテスト' do
         is_expected.to have_selector '.fas.fa-home'
       end
       it '会員一覧リンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-user-friends'
+      end
+      it 'ルームリンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-book-open'
+      end
+      it 'レビューリンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-star'
+      end
+      it '通知リンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-circle'
+      end
+      it 'グループ一覧リンクのアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-users'
       end
-      it '投稿リンクのアイコンが表示される' do
-        is_expected.to have_selector '.fas.fa-book-open'
+      it 'グループ作成リンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-object-group'
+      end
+      it '退会リンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-users-slash'
+      end
+      it '辞典リンクのアイコンが表示される' do
+        is_expected.to have_selector '.fas.fa-book'
       end
       it 'ログアウトリンクのアイコンが表示される' do
         is_expected.to have_selector '.fas.fa-sign-out-alt'

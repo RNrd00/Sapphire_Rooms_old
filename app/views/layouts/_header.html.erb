@@ -1,4 +1,4 @@
-      <nav class="navbar navbar-expand-lg navbar-light bg-info p-4">
+      <nav class="navbar navbar-expand-lg navbar-light bg-info p-1">
         <div class="container">
           <a class="navbar-brand text-light" href="/"><i class="fas fa-hotel"></i> <span>SapphireRooms</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-lavel="Toggle navigation">
@@ -6,12 +6,20 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto" style="flex-wrap: wrap;">
-              <%if customer_signed_in?%>
+              <% if customer_signed_in? || admin_signed_in? %>
+              <% unless admin_signed_in? %>
               <li>
                 <%= link_to public_customer_path(current_customer), method: :get, class: 'nav-link text-light' do %>
                   <i class="fas fa-home"></i> ホーム
                 <%end%>
               </li>
+              <% else %>
+              <li>
+                <%= link_to root_path, method: :get, class: 'nav-link text-light' do %>
+                  <i class="fas fa-home"></i> ホーム
+                <%end%>
+              </li>
+              <% end %>
               <li>
                 <%= link_to public_customers_path, method: :get, class: 'nav-link text-light' do %>
                   <i class="fas fa-user-friends"></i> 会員一覧
@@ -37,61 +45,20 @@
                   <i class="fas fa-users"></i> グループ一覧
                 <%end%>
               </li>
+              <% if !admin_signed_in? %>
               <li>
                 <%= link_to new_public_group_path, method: :get, class: 'nav-link text-light' do %>
                   <i class="fas fa-object-group"></i> グループ作成
                 <%end%>
               </li>
-              <% if current_customer.name != "guestuser" %>
+              <% end %>
+              <% if !admin_signed_in? && current_customer.name != "guestuser" %>
               <li>
                 <%= link_to public_customer_unsubscribe_path(current_customer), method: :get, class: 'nav-link text-light' do %>
                   <i class="fas fa-users-slash"></i> 退会する
                 <%end%>
               </li>
               <%end%>
-              <li>
-                <%= link_to public_dictionaries_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-book"></i> 辞典
-                <%end%>
-              </li>
-              <li>
-                <%= link_to destroy_customer_session_path, method: :delete, class: 'nav-link text-light' do %>
-                  <i class="fas fa-sign-out-alt"></i> ログアウト
-                <%end%>
-              </li>
-
-              <% elsif admin_signed_in? %>
-
-              <li>
-                <%= link_to root_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-home"></i> ホーム
-                <%end%>
-              </li>
-              <li>
-                <%= link_to public_customers_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-user-friends"></i> 会員一覧
-                <%end%>
-              </li>
-              <li>
-                <%= link_to public_books_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-book-open"></i> ルーム
-                <%end%>
-              </li>
-              <li>
-                <%= link_to public_ratings_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-star"></i> レビュー
-                <%end%>
-              </li>
-              <li>
-                <%= link_to public_notifications_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-circle n-circle"></i> 通知
-                <%end%>
-              </li>
-              <li>
-                <%= link_to public_groups_path, method: :get, class: 'nav-link text-light' do %>
-                  <i class="fas fa-users"></i> グループ一覧
-                <%end%>
-              </li>
               <li>
                 <%= link_to public_dictionaries_path, method: :get, class: 'nav-link text-light' do %>
                   <i class="fas fa-book"></i> 辞典

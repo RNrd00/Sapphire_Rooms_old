@@ -28,6 +28,45 @@ describe '[STEP1] ユーザログイン前のテスト' do
     end
   end
 
+  describe '辞典画面のテスト' do
+    before do
+      visit '/public/dictionaries'
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/dictionaries'
+      end
+      it '最初のページに「ここは辞典ページです。」と表示される？' do
+        expect(page).to have_content 'ここは辞典ページです。'
+      end
+      it 'SNSページに繋がるリンクは存在する？' do
+        expect(page).to have_link 'SNSとは'
+      end
+    end
+  end
+  
+  describe 'SNS説明ページのテスト' do
+    before do
+      visit '/public/dictionaries/sns'
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/dictionaries/sns'
+      end
+      it '最初のページに「SNSとは？」と表示される？' do
+        expect(page).to have_content 'SNSとは？'
+      end
+      it 'Snapchatに繋がるリンクは存在する？' do
+        expect(page).to have_content 'Snapchat'
+      end
+      it 'TikTokに繋がるリンクは存在する？' do
+        expect(page).to have_content 'TikTok'
+      end
+    end
+  end
+
   describe 'ヘッダーのテスト: ログインしていない場合' do
     before do
       visit root_path
@@ -109,6 +148,18 @@ describe '[STEP1] ユーザログイン前のテスト' do
         click_link login_link, match: :first
         is_expected.to eq '/customers/sign_in'
       end
+      it 'ゲストログインを押すと、ゲストログインする' do
+        guestlogin_link = find_all('a')[6].text
+        guestlogin_link = guestlogin_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link guestlogin_link, match: :first
+        is_expected.to eq '/'
+      end
+      it '管理者ログインを押すと、管理者ログイン画面に遷移する' do
+        admin_link = find_all('a')[7].text
+        admin_link = admin_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link admin_link, match: :first
+        is_expected.to eq '/admin/sign_in'
+      end
     end
   end
 
@@ -152,7 +203,7 @@ describe '[STEP1] ユーザログイン前のテスト' do
       it '正しく新規登録される' do
         expect { click_button '新規登録' }.to change(Customer.all, :count).by(1)
       end
-      it '新規登録後のリダイレクト先が、新規登録できたユーザの詳細画面になっている' do
+      it '新規登録後のリダイレクト先が、ホーム画面になっている' do
         click_button '新規登録'
         expect(current_path).to eq '/'
       end

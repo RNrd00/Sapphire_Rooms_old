@@ -29,11 +29,47 @@ describe '[STEP2] ユーザログイン後のテスト' do
         click_link customers_link
         is_expected.to eq '/public/customers'
       end
-      it '投稿を押すと、投稿一覧画面に遷移する' do
+      it 'ルームを押すと、ルーム一覧画面に遷移する' do
         books_link = find_all('a')[3].text
         books_link = books_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
         click_link books_link
         is_expected.to eq '/public/books'
+      end
+      it 'レビューを押すと、レビュー画面に遷移する' do
+        rate_link = find_all('a')[4].text
+        rate_link = rate_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link rate_link
+        is_expected.to eq '/public/ratings'
+      end
+      it '通知を押すと、通知画面に遷移する' do
+        notification_link = find_all('a')[5].text
+        notification_link = notification_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link notification_link
+        is_expected.to eq '/public/notifications'
+      end
+      it 'グループ一覧を押すと、グループ一覧画面に遷移する' do
+        group_link = find_all('a')[6].text
+        group_link = group_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link group_link
+        is_expected.to eq '/public/groups'
+      end
+      it 'グループ作成を押すと、グループ作成覧画面に遷移する' do
+        creategroup_link = find_all('a')[7].text
+        creategroup_link = creategroup_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link creategroup_link
+        is_expected.to eq '/public/groups/new'
+      end
+      it '退会するを押すと、退会画面に遷移する' do
+        unsubscribe_link = find_all('a')[8].text
+        unsubscribe_link = unsubscribe_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link unsubscribe_link
+        is_expected.to eq '/public/customers/' + customer.id.to_s + '/unsubscribe'
+      end
+      it '辞典を押すと、辞典画面に遷移する' do
+        dictionaries_link = find_all('a')[9].text
+        dictionaries_link = dictionaries_link.gsub(/\n/, '').gsub(/\A\s*/, '').gsub(/\s*\Z/, '')
+        click_link dictionaries_link
+        is_expected.to eq '/public/dictionaries'
       end
     end
   end

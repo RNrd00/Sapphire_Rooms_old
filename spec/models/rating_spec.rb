@@ -44,5 +44,15 @@ RSpec.describe 'Ratingモデルのテスト', type: :model do
         expect(Rating.reflect_on_association(:customer).macro).to eq :belongs_to
       end
     end
+    context 'RatingTagモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Rating.reflect_on_association(:rating_tags).macro).to eq :has_many
+      end
+    end
+        context 'Tagモデルとの関係' do
+      it '1:Nとなっている' do
+        expect(Rating.reflect_on_association(:tags).macro).to eq :has_many
+      end
+    end
   end
 end

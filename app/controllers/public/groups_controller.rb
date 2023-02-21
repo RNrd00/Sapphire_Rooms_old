@@ -11,7 +11,7 @@ class Public::GroupsController < ApplicationController
 
   def index
     @book = Book.new
-    @groups = Group.all
+    @groups = Group.page(params[:page])
   end
 
   def show

@@ -1,11 +1,11 @@
 <%= form_with model: book, method: :post, url: public_books_path do |f| %>
     <%= f.label '貴方の名前:' %>
-    <%= f.text_field :name, class:'form-control w-25' %>
+    <%= f.text_field :name, class:'form-control w-50', placeholder: '1~100文字で入力してください' %>
     <%= f.label '削除パスワード(1~100の文字か数字):' %>
-    <%= f.text_field :delete_key, :size => "/\A\w{1,100}\z/i", class:'form-control w-25' %>
+    <%= f.text_field :delete_key, :size => "/\A\w{1,100}\z/i", class:'form-control w-50', placeholder: '1~100文字で入力してください' %>
     <br>
     <%= f.label 'ルーム説明' %>
-    <%= f.text_area :introduce, class:'form-control w-100', rows:'5' %>
+    <%= f.text_area :introduce, class:'form-control w-100', rows:'5', placeholder: '1~10000文字で入力してください' %>
     <br>
     <%= f.label "タグ" %>
     <%= f.text_field :tag_name, class: 'form-control book_tag_name' %>

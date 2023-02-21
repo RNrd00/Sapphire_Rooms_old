@@ -4,8 +4,8 @@ class Group < ApplicationRecord
   has_many :group_customers, dependent: :destroy
   has_many :customers, through: :group_customers, source: :customer
 
-  validates :name, presence: true
-  validates :introduction, presence: true
+  validates :name, length: { minimum: 1, maximum: 100 }
+  validates :introduction, length: { minimum: 1, maximum: 10000 }
 
   def get_image
     image.attached? ? image : 'no_image.jpg'

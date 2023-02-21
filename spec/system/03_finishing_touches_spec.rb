@@ -200,6 +200,58 @@ describe '[STEP3] 仕上げのテスト' do
       visit edit_public_book_path(book)
       is_expected.to eq '/customers/sign_in'
     end
+    it '検索画面' do
+      visit public_search_path
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'フォロー一覧画面' do
+      visit public_customer_followings_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'ブックマーク画面' do
+      visit public_customer_daily_posts_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it '退会画面' do
+      visit public_customer_unsubscribe_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'いいねした一覧画面' do
+      visit likes_public_customer_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'イベントお知らせ画面' do
+      visit new_public_group_event_notice_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'グループ画面' do
+      visit public_groups_path
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'グループ作成画面' do
+      visit new_public_group_path
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'グループ編集画面' do
+      visit edit_public_group_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'グループ一覧画面' do
+      visit public_group_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'チャット画面' do
+      visit public_chat_path(customer)
+      is_expected.to eq '/customers/sign_in'
+    end
+    it 'レビュー画面' do
+      visit public_ratings_path
+      is_expected.to eq '/customers/sign_in'
+    end
+    it '通知画面' do
+      visit public_notifications_path
+      is_expected.to eq '/customers/sign_in'
+    end
   end
 
   describe '他人の画面のテスト' do

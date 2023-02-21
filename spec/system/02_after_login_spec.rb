@@ -5,6 +5,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
   let!(:other_customer) { create(:customer) }
   let!(:book) { create(:book, customer:) }
   let!(:other_book) { create(:book, customer: other_customer) }
+  let!(:favorite) { create(:favorite, book: book, customer: customer) }
 
   before do
     visit new_customer_session_path
@@ -111,6 +112,13 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq '/public/books/' + Book.last.id.to_s
       end
     end
+
+   context 'いいね確認' do
+    it 'リンクが諸々正しい' do
+      expect(page).to have_link '', href: public_book_favorites_path(book)
+      expect(page).to have_css('i.fas')
+    end
+   end
   end
 
   describe '自分の投稿詳細画面のテスト' do
@@ -142,6 +150,13 @@ describe '[STEP2] ユーザログイン後のテスト' do
         expect(current_path).to eq '/public/books/' + book.id.to_s + '/edit'
       end
     end
+
+   context 'いいね確認' do
+    it 'リンクが諸々正しい' do
+      expect(page).to have_link '', href: public_book_favorites_path(book)
+      expect(page).to have_css('i.fas')
+    end
+   end
   end
 
   describe '自分の投稿編集画面のテスト' do
@@ -209,7 +224,7 @@ describe '[STEP2] ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/public/customers'
       end
-      it '自分と他人の画像が表示される: fallbackの画像がサイドバーの1つ＋一覧(1人)の1つの計2つ存在する' do
+      it '自分と他人の画像が表示される: fallbackの画像が1つ＋一覧(1人)の1つの計2つ存在する' do
         expect(all('img').size).to eq(2)
       end
       it '自分と他人の名前がそれぞれ表示される' do

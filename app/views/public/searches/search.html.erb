@@ -1,10 +1,12 @@
-<% if @model == 'customer' %>
-    <h3>ユーザーの検索結果 "<%= @content %>"</h3>
-    <%= render 'public/customers/index', customer: @records %>
-<% elsif @model == 'tag' %>
-    <h3>タグの検索結果 "<%= @content %>"</h3>
-    <%= render 'public/ratings/index', ratings: @records %>
-<% elsif @model == 'book' || 'book_tag' %>
-    <h3>ルームやルームタグの検索結果 "<%= @content %>"</h3>
-    <%= render 'public/books/index', books: @records %>
+<% if !@model.nil? %>
+    <% if @model == 'customer' %>
+        <h3>ユーザーの検索結果 "<%= @content %>"</h3>
+        <%= render 'public/customers/index', customer: @records %>
+    <% elsif @model == 'tag' %>
+        <h3>タグの検索結果 "<%= @content %>"</h3>
+        <%= render 'public/ratings/index', ratings: @records %>
+    <% elsif @model == 'book' || 'book_tag' %>
+        <h3>ルームやルームタグの検索結果 "<%= @content %>"</h3>
+        <%= render 'public/books/index', books: @records %>
+    <% end %>
 <% end %>

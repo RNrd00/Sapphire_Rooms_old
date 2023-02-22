@@ -254,6 +254,33 @@ describe '[STEP3] 仕上げのテスト' do
     end
   end
 
+  describe 'ゲストユーザーのテスト' do
+
+    subject { current_path }
+
+    before do
+      visit root_path
+      click_link 'ゲストログイン'
+    end
+
+    it '投稿編集画面' do
+      visit edit_public_book_path(book)
+      is_expected.to eq '/public/books'
+    end
+    it 'イベントお知らせ画面' do
+      visit new_public_group_event_notice_path(customer)
+      is_expected.to eq '/'
+    end
+    it 'グループ編集画面' do
+      visit edit_public_group_path(customer)
+      is_expected.to eq '/'
+    end
+    it 'チャット画面' do
+      visit public_chat_path(customer)
+      is_expected.to eq '/public/books'
+    end
+  end
+
   describe '他人の画面のテスト' do
     before do
       visit new_customer_session_path

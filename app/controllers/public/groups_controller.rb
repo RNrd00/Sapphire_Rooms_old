@@ -40,8 +40,11 @@ class Public::GroupsController < ApplicationController
   end
 
   def destroy
-    @group.destroy
-    redirect_to public_groups_path, notice: 'グループを削除しました'
+    if admin_signed_in?
+      @group = Group.find(params[:id])
+    end
+     @group.destroy
+     redirect_to public_groups_path, notice: 'グループを削除しました'
   end
 
   private

@@ -41,6 +41,11 @@
                       <% end %>
                      </td>
                     <% end %>
+                    <td>
+                     <% if admin_signed_in? %>
+                      <%= link_to '管理者用ルーム削除', public_group_path(@group), data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger', method: :delete %>
+                     <% end %>
+                    </td>
                 </tr>
             </table>
         </div>

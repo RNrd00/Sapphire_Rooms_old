@@ -1,1 +1,53 @@
-<%= render 'public/customers/index', customer: @customer %>
+<table class="table table-secondary table-striped">
+    <thead>
+        <tr>
+            <th>画像</th>
+            <th>ユーザーID</th>
+            <th>名前</th>
+            <th>フォロー</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @customer.each do |customer| %>
+            <% if customer.name != "guestuser" %>
+            <tr>
+                <td>
+                <%= link_to public_customer_path(customer.id) do %>
+                    <%= image_tag customer.get_profile_image, size: '50x50' %>
+                <% end %>
+                </td>
+                <td><%= customer.id %></td>
+                <td><%= customer.name %></td>
+                <% unless admin_signed_in? %>
+                <td>
+                    <% if current_customer.name != "guestuser" %>
+                     <div class="mypage-follow-contents-<%= customer.id %>">
+                      <%= render 'public/relationships/btn', customer: customer %>
+                     </div>
+                    <% else %>
+                        <h6 class="text-success">ゲストユーザーはフォロー機能を使用できません。ログインしてください。</h6>
+                    <% end %>
+                </td>
+                <% end %>
+                <td><%= link_to '詳細画面', public_customer_path(customer.id), class:'btn btn-secondary' %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        <%= paginate @customer %>
+    </tbody>
+</table>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+            <% unless admin_signed_in? %>
+                <% if current_customer.name != "guestuser" %>
+                    <%= link_to "グループ作成", new_public_group_path, class:'btn btn-primary' %>
+                    <%= link_to "グループ一覧", public_groups_path, class:'btn btn-primary' %>
+                <% end %>
+            <% end %>
+            <% if admin_signed_in? %>
+                <%= link_to "グループ一覧", public_groups_path, class:'btn btn-primary' %>
+            <% end %>
+        </div>
+    </div>
+</div>

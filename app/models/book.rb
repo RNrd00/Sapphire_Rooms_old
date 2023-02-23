@@ -9,7 +9,7 @@ class Book < ApplicationRecord
   # ラムダ(Proc)を使用。メソッドチェーンも使用。
   has_many :week_favorites, lambda {
                               where(created_at: ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day))
-                            }, class_name: 'Favorite'
+                            }, class_name: "Favorite"
 
   validates :name, length: { minimum: 1, maximum: 100 }
   validates :introduce, length: { minimum: 1, maximum: 10000 }
@@ -46,14 +46,14 @@ class Book < ApplicationRecord
   end
 
   def self.search_for(content, method)
-    if method == 'perfect'
+    if method == "perfect"
       Book.where(introduce: content)
-    elsif method == 'forward'
-      Book.where('introduce LIKE ?', content + '%')
-    elsif method == 'backward'
-      Book.where('introduce LIKE ?', '%' + content)
+    elsif method == "forward"
+      Book.where("introduce LIKE ?", content + "%")
+    elsif method == "backward"
+      Book.where("introduce LIKE ?", "%" + content)
     else
-      Book.where('introduce LIKE ?', '%' + content + '%')
+      Book.where("introduce LIKE ?", "%" + content + "%")
     end
   end
 end

@@ -25,15 +25,14 @@ class Public::ChatsController < ApplicationController
   end
 
   private
+    def chat_params
+      params.require(:chat).permit(:message, :room_id)
+    end
 
-  def chat_params
-    params.require(:chat).permit(:message, :room_id)
-  end
+    def reject_non_related
+      customer = Customer.find(params[:id])
+      return if current_customer.following?(customer) && customer.following?(current_customer)
 
-  def reject_non_related
-    customer = Customer.find(params[:id])
-    return if current_customer.following?(customer) && customer.following?(current_customer)
-
-    redirect_to public_books_path, notice: '相互フォローしなければDM機能は使用出来ません'
-  end
+      redirect_to public_books_path, notice: "相互フォローしなければDM機能は使用出来ません"
+    end
 end

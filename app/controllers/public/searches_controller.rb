@@ -5,14 +5,14 @@ class Public::SearchesController < ApplicationController
     @model = params[:model]
     @content = params[:content]
     @method = params[:method]
-    if @model == 'customer'
+    if @model == "customer"
       @records = Customer.search_for(@content, @method).page(params[:page])
-    elsif @model == 'book'
+    elsif @model == "book"
       @records = Book.search_for(@content, @method).page(params[:page])
-    elsif @model == 'tag'
+    elsif @model == "tag"
       @records = Tag.search_ratings_for(@content, @method)
       @records = Kaminari.paginate_array(@records).page(params[:page])
-    elsif @model == 'book_tag'
+    elsif @model == "book_tag"
       @records = Tag.search_books_for(@content, @method)
       @records = Kaminari.paginate_array(@records).page(params[:page])
     end

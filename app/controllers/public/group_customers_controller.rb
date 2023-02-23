@@ -16,6 +16,6 @@ class Public::GroupCustomersController < ApplicationController
   def move_to_sign_in
     return if customer_signed_in? || admin_signed_in?
 
-    redirect_to new_customer_session_path, notice: 'ログインしてください。'
+    redirect_to new_customer_session_path, notice: "ログインしてください。"
   end
 end

@@ -6,6 +6,8 @@ describe '[STEP2] ユーザログイン後のテスト' do
   let!(:book) { create(:book, customer:) }
   let!(:other_book) { create(:book, customer: other_customer) }
   let!(:favorite) { create(:favorite, book: book, customer: customer) }
+  let!(:rating) { create(:rating, customer:) }
+  let!(:other_rating) { create(:rating, customer: other_customer) }
 
   before do
     visit new_customer_session_path
@@ -300,6 +302,36 @@ describe '[STEP2] ユーザログイン後のテスト' do
       end
       it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
         expect(current_path).to eq '/public/customers/' + customer.id.to_s
+      end
+    end
+  end
+
+    describe 'レビュー一覧画面のテスト' do
+    before do
+      visit public_ratings_path
+    end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/ratings'
+      end
+      it '自分の投稿と他人の投稿のオピニオンが表示される' do
+        expect(page).to have_content rating.introduction
+        expect(page).to have_content other_rating.introduction
+      end
+    end
+
+    context 'レビュー作成成功のテスト' do
+      before do
+        fill_in 'rating[name]', with: Faker::Lorem.characters(number: 5)
+        fill_in 'rating[introduction]', with: Faker::Lorem.characters(number: 20)
+      end
+      it '自分の新しいレビューが正しく保存される' do
+        expect { click_button 'レビューする' }.to change(customer.ratings, :count).by(1)
+      end
+      it 'リダイレクト先が、レビュー一覧画面になっている' do
+        click_button 'レビューする'
+        expect(current_path).to eq '/public/ratings'
       end
     end
   end

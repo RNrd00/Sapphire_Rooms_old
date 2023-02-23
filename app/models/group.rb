@@ -1,6 +1,6 @@
 class Group < ApplicationRecord
   has_one_attached :image
-  belongs_to :owner, class_name: 'Customer'
+  belongs_to :owner, class_name: "Customer"
   has_many :group_customers, dependent: :destroy
   has_many :customers, through: :group_customers, source: :customer
 
@@ -8,11 +8,11 @@ class Group < ApplicationRecord
   validates :introduction, length: { minimum: 1, maximum: 10000 }
 
   def get_image
-    image.attached? ? image : 'no_image.jpg'
+    image.attached? ? image : "no_image.jpg"
   end
 
   def is_owner_by?(customer)
-     owner.id == customer.id
+    owner.id == customer.id
   end
 
   def includesCustomer?(customer)

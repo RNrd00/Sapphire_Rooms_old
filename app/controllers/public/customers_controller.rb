@@ -25,9 +25,9 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to public_customer_path(current_customer), notice: 'プロフィールの更新に成功しました！'
+      redirect_to public_customer_path(current_customer), notice: "プロフィールの更新に成功しました！"
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -45,13 +45,13 @@ class Public::CustomersController < ApplicationController
   def release
     @customer = Customer.find(params[:customer_id])
     @customer.released! unless @customer.released?
-    redirect_to request.referer, notice: 'このアカウントをブロック解除しました'
+    redirect_to request.referer, notice: "このアカウントをブロック解除しました"
   end
 
   def nonrelease
     @customer = Customer.find(params[:customer_id])
     @customer.nonreleased! unless @customer.nonreleased?
-    redirect_to request.referer, notice: 'このアカウントをブロックしました'
+    redirect_to request.referer, notice: "このアカウントをブロックしました"
   end
 
   def unsubscribe
@@ -59,53 +59,52 @@ class Public::CustomersController < ApplicationController
 
   def withdrawal
     if admin_signed_in?
-     @customer = Customer.find(params[:customer_id])
+      @customer = Customer.find(params[:customer_id])
     else
-     @customer = current_customer
+      @customer = current_customer
     end
     @customer.update(is_active: false)
     reset_session
-    redirect_to root_path, notice: '退会処理を実行いたしました'
+    redirect_to root_path, notice: "退会処理を実行いたしました"
   end
 
   private
-
-  def customer_params
-    params.require(:customer).permit(:name, :introduce, :profile_image)
-  end
-
-  def exist_customer?
-    return if Customer.find_by(id: params[:id])
-
-    redirect_to root_path, notice: '申し訳ございませんが、そのページは削除されているか元から存在しません。'
-  end
-
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
-
-  def ensure_correct_customer
-    @customer = Customer.find(params[:id])
-    return if @customer == current_customer
-
-    if admin_signed_in?
-      redirect_to root_path
-    else
-      redirect_to public_customer_path(current_customer), notice: '他のユーザーの編集ページには遷移出来ません'
+    def customer_params
+      params.require(:customer).permit(:name, :introduce, :profile_image)
     end
-  end
 
-  def ensure_guest_customer
-   if !admin_signed_in?
-    return unless current_customer.name == 'guestuser'
+    def exist_customer?
+      return if Customer.find_by(id: params[:id])
 
-    redirect_to public_customer_path(current_customer), notice: 'ゲストユーザーはプロフィール編集画面や退会画面へは遷移できません。'
-   end
-  end
+      redirect_to root_path, notice: "申し訳ございませんが、そのページは削除されているか元から存在しません。"
+    end
 
-  def move_to_sign_in
-    return if customer_signed_in? || admin_signed_in?
+    def set_customer
+      @customer = Customer.find(params[:id])
+    end
 
-    redirect_to new_customer_session_path, notice: 'ログインしてください。'
-  end
+    def ensure_correct_customer
+      @customer = Customer.find(params[:id])
+      return if @customer == current_customer
+
+      if admin_signed_in?
+        redirect_to root_path
+      else
+        redirect_to public_customer_path(current_customer), notice: "他のユーザーの編集ページには遷移出来ません"
+      end
+    end
+
+    def ensure_guest_customer
+      if !admin_signed_in?
+        return unless current_customer.name == "guestuser"
+
+        redirect_to public_customer_path(current_customer), notice: "ゲストユーザーはプロフィール編集画面や退会画面へは遷移できません。"
+      end
+    end
+
+    def move_to_sign_in
+      return if customer_signed_in? || admin_signed_in?
+
+      redirect_to new_customer_session_path, notice: "ログインしてください。"
+    end
 end

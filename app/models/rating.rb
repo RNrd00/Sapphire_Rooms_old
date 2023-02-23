@@ -20,14 +20,14 @@ class Rating < ApplicationRecord
   end
 
   def self.search_for(content, method)
-    if method == 'perfect'
+    if method == "perfect"
       Rating.where(name: content)
-    elsif method == 'forward'
-      Rating.where('name LIKE ?', content + '%')
-    elsif method == 'backward'
-      Rating.where('name LIKE ?', '%' + content)
+    elsif method == "forward"
+      Rating.where("name LIKE ?", content + "%")
+    elsif method == "backward"
+      Rating.where("name LIKE ?", "%" + content)
     else
-      Rating.where('name LIKE ?', '%' + content + '%')
+      Rating.where("name LIKE ?", "%" + content + "%")
     end
   end
 end

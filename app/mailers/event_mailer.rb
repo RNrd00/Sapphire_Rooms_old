@@ -6,9 +6,9 @@ class EventMailer < ApplicationMailer
 
     @mail = EventMailer.new
     mail(
-      from: ENV['MAIL_ADDRESS'],
+      from: ENV["MAIL_ADDRESS"],
       to: member.email,
-      subject: 'New Event Notice!!'
+      subject: "New Event Notice!!"
     )
   end
 

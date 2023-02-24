@@ -21,7 +21,7 @@
                 <% unless admin_signed_in? %>
                 <td>
                     <% if current_customer.name != "guestuser" %>
-                     <div class="mypage-follow-contents-<%= customer.id %>">
+                     <div class=<%= "mypage-follow-contents-" + customer.id.to_s %> >
                       <%= render 'public/relationships/btn', customer: customer %>
                      </div>
                     <% else %>

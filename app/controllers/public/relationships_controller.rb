@@ -3,16 +3,14 @@ class Public::RelationshipsController < ApplicationController
   before_action :exist_customer?, only: %i[followings followers create destroy]
 
   def create
-    customer = Customer.find(params[:customer_id])
-    current_customer.follow(customer)
-    customer.create_notification_follow!(current_customer)
-    redirect_to request.referer
+    @customer = Customer.find(params[:customer_id])
+    current_customer.follow(@customer)
+    @customer.create_notification_follow!(current_customer)
   end
 
   def destroy
-    customer = Customer.find(params[:customer_id])
-    current_customer.unfollow(customer)
-    redirect_to request.referer
+    @customer = Customer.find(params[:customer_id])
+    current_customer.unfollow(@customer)
   end
 
   def followings

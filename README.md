@@ -22,6 +22,9 @@ SNSサイトは数多く存在しますが、特定の趣味に特化し尚且�
  - その話題を趣向が同じ、類似した方と共有したい時
 
 ## 設計書
+ - 画面遷移図(https://app.diagrams.net/#G1ZxBK_o01Vg36R4cDaMzyZ0COxnT7XjVm)
+ - ワイヤーフレーム(https://app.diagrams.net/#G1B531z0yYoChg4muFL3iw2M7ByGM-Ab_e)
+ - WBS(https://docs.google.com/spreadsheets/d/1ecp_IKLNUCbcZX4trIyEfoAcB4zPpONiueXTdDglW7c/edit#gid=1773513600)
 
 ## 開発環境
 - OS：Linux(CentOS)

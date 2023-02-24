@@ -56,12 +56,10 @@
             <div class="book-comments-index">
                 <%= render 'public/book_comments/index', book: @book %>
             </div>
-            <% unless admin_signed_in? %>
-                <% if @customer.name != "guestuser" %>
-                    <%= render 'public/book_comments/form', book: @book, book_comment: @book_comment %>
-                <% else %>
-                    <h3 class="text-warning">ゲストユーザーなのでコメント機能は使用できません。ログインしてください。</h3>
-                <% end %>
+            <% if !admin_signed_in? && @customer.name != "guestuser" %>
+                <%= render 'public/book_comments/form', book: @book, book_comment: @book_comment %>
+            <% elsif !admin_signed_in? && @customer.name == "guestuser" %>
+                <h3 class="text-warning">ゲストユーザーなのでコメント機能は使用できません。ログインしてください。</h3>
             <% end %>
         </div>
     </div>

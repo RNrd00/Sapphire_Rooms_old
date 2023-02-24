@@ -1,3 +1,4 @@
+<div id ="comments-error"></div>
 <%= form_with(model: [book, book_comment], method: :post, url: public_book_book_comments_path(book, book_comment), local: false) do |f| %>
     <%= f.text_area :comment, rows:'5', placeholder: "1~2000文字で入力してください", class:'w-100 form-control' %>
     <%= f.submit "送信する", class:'btn btn-success btn-lg btn-base-1 mt-20 pull-light' %>

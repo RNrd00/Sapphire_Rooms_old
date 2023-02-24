@@ -1,26 +1,26 @@
 <div class="container">
     <h1>いいね一覧</h1>
-        <div class="row">
-            <div class="col-sm-12">
-                <% @like_books.each do |book| %>
-                <div class="mb-5" style="padding: 0.5em 1em; margin: 2em 0; color: #5989cf; background: #18F172; border-bottom: solid 6px #18C672; border-radius: 9px;">
-                <br>
-                <div class="d-flex justify-content-around">
-                    <div class="border border-5 border-dark">ユーザー名:<%= book.name %></div>
-                    <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
-                </div>
-                <br>
-                <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
-                    <%= safe_join(book.introduce.split("\n"),tag(:br)) %>
-                </div>
-                <div class=<%= "favorite-" + book.id.to_s %> >
-                    <%= render 'public/favorites/btn', book: book %>
-                </div>
-                <% if !current_page?(public_book_path(book.id)) %>
-                    <div class="text-center"><%= link_to "入室する", public_book_path(book.id), method: :get, class:'btn btn-success' %></div>
-                <% end %>
-                </div>
-                <% end %>
+    <div class="row">
+        <div class="col-sm-12">
+            <% @like_books.each do |book| %>
+            <div class="mb-5" style="padding: 0.5em 1em; margin: 2em 0; color: #5989cf; background: #18F172; border-bottom: solid 6px #18C672; border-radius: 9px;">
+            <br>
+            <div class="d-flex justify-content-around">
+                <div class="border border-5 border-dark">ユーザー名:<%= book.name %></div>
+                <div class="border border-5 border-dark">投稿者のID:<%= book.customer_id %></div>
             </div>
+            <br>
+            <div class="col-sm-11 border border-5 border-primary rounded mx-auto">
+                <%= safe_join(book.introduce.split("\n"),tag(:br)) %>
+            </div>
+            <div class=<%= "favorite-" + book.id.to_s %> >
+                <%= render 'public/favorites/btn', book: book %>
+            </div>
+            <% if !current_page?(public_book_path(book.id)) %>
+                <div class="text-center"><%= link_to "入室する", public_book_path(book.id), method: :get, class:'btn btn-success' %></div>
+            <% end %>
+            </div>
+            <% end %>
         </div>
+    </div>
 </div>

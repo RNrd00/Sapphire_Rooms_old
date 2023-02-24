@@ -26,16 +26,14 @@
             <h1>ルーム作成</h1>
         </div>
     </div>
-    <% unless admin_signed_in? %>
-        <% if @customer.name != "guestuser" %>
+    <% if !admin_signed_in? && @customer.name != "guestuser" %>
         <div class="row">
             <div class="col-sm-12">
                 <%= render 'public/books/form', book: @book %>
             </div>
         </div>
-        <% else %>
-                <h3 class="text-warning">ゲストユーザーなのでルーム作成機能は使用できません。ログインしてください。</h3>
-        <% end %>
+    <% elsif !admin_signed_in? && @customer.name == "guestuser" %>
+        <h3 class="text-warning">ゲストユーザーなのでルーム作成機能は使用できません。ログインしてください。</h3>
     <% end %>
     <br>
     <h1>ルーム一覧</h1>

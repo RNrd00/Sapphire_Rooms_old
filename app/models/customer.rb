@@ -28,7 +28,7 @@ class Customer < ApplicationRecord
   enum status: { nonreleased: 0, released: 1 }
 
   def get_profile_image
-    profile_image.attached? ? profile_image : "no_image.jpg" # 論理演算子でリファクタリング
+    profile_image.attached? ? profile_image : "no_image.jpg" # 条件演算子でリファクタリング
   end
 
   def follow(customer)

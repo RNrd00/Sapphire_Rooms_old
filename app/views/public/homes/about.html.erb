@@ -17,11 +17,21 @@
             <p>以下に、私が利用致したDMM Webcamp様の校舎場所を、地図として提示しておきます。</p>
         </div>
     </div>
-</div>
-<div class="container">
     <div class="row">
         <div class="col-sm-9 mx-auto">
-            <iframe width="860" height="500" src="http://maps.google.co.jp/maps?&output=embed&q=DMM+WEBCAMP+新宿校&z=18"></iframe>
+            <iframe class="google-map" width="860" height="500" src="http://maps.google.co.jp/maps?&output=embed&q=DMM+WEBCAMP+新宿校&z=18"></iframe>
+            <style>
+            @media screen and (max-width: 1300px) {
+                .google-map {
+                  width: 100%;
+                }
+            }
+            @media screen and (max-width: 520px) {
+                .google-map {
+                  width: 95%;
+                }
+            }
+            </style>
         </div>
     </div>
 </div>

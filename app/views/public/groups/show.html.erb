@@ -18,7 +18,7 @@
                     <td><%= @group.name %></td>
                     <td><%= @group.introduction %></td>
                     <td><% @group.customers.each { |customer| %><li style="list-style: none;"><%= customer.name %></li><% } %></td>
-                    <% unless admin_signed_in? || current_customer.name == "guestuser" %>
+                    <% if !admin_signed_in? && current_customer.name != "guestuser" %>
                      <% if @group.is_owner_by?(current_customer) %>
                         <td>
                             <%= link_to '編集する', edit_public_group_path(@group), class: 'btn btn-sm btn-success' %>
@@ -36,16 +36,15 @@
                      </td>
                      <% end %>
                      <td>
-                      <% if @group.owner_id == current_customer.id %>
+                     <% if @group.owner_id == current_customer.id %>
                        <%= link_to 'ルーム削除', public_group_path(@group), data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger', method: :delete %>
-                      <% end %>
-                     </td>
-                    <% end %>
-                    <td>
-                     <% if admin_signed_in? %>
-                      <%= link_to '管理者用ルーム削除', public_group_path(@group), data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger', method: :delete %>
                      <% end %>
+                     </td>
+                    <% elsif admin_signed_in? %>
+                    <td>
+                      <%= link_to '管理者用ルーム削除', public_group_path(@group), data: {confirm: "本当に削除しますか？"}, class:'btn btn-danger', method: :delete %>
                     </td>
+                    <% end %>
                 </tr>
             </table>
         </div>

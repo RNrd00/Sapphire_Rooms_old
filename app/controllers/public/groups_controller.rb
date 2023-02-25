@@ -2,7 +2,6 @@ class Public::GroupsController < ApplicationController
   before_action :move_to_sign_in, expect: %i[index show edit update new create destroy]
   before_action :exist_group?, only: %i[show edit update destroy]
   before_action :ensure_correct_customer, only: %i[edit update destroy]
-  before_action :move_to_admin_in, only: %i[new edit]
   before_action :ensure_guest_customer, only: %i[create edit update destroy]
 
   def new
@@ -78,11 +77,5 @@ class Public::GroupsController < ApplicationController
       return unless current_customer.name == "guestuser"
 
       redirect_to public_customer_path(current_customer), notice: "ゲストユーザーはグループ画面へ遷移できません。"
-    end
-
-    def move_to_admin_in
-      return unless admin_signed_in?
-
-      redirect_to public_customers_path
     end
 end

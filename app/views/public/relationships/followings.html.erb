@@ -1,6 +1,6 @@
 <h2>フォロー</h2>
 <% if @customers.exists? %>
-    <%= render 'public/customers/index', customer: @customers %>
+    <%= render 'public/relationships/index', customer: @customers %>
 <h2>フォローのタイムライン</h2>
     <%= render 'public/books/index', books: @book %>
 <% else %>

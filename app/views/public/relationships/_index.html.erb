@@ -1,0 +1,38 @@
+<table class="table table-secondary table-striped">
+    <thead>
+        <tr>
+            <th>画像</th>
+            <th>ユーザーID</th>
+            <th>名前</th>
+            <th>フォロー</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% customer.each do |customer| %>
+            <% if customer.name != "guestuser" %>
+            <tr>
+                <td>
+                <%= link_to public_customer_path(customer.id) do %>
+                    <%= image_tag customer.get_profile_image, size: '50x50' %>
+                <% end %>
+                </td>
+                <td><%= customer.id %></td>
+                <td><%= customer.name %></td>
+                <% if !admin_signed_in? && current_customer.name != "guestuser" %>
+                <td>
+                    <div class=<%= "mypage-follow-contents-" + customer.id.to_s %> >
+                      <%= render 'public/relationships/btn', customer: customer %>
+                    </div>
+                </td>
+                <% elsif !admin_signed_in? && current_customer.name == "guestuser" %>
+                <td>
+                    <h6 class="text-success">ゲストユーザーはフォロー機能を使用できません。ログインしてください。</h6>
+                </td>
+                <% end %>
+                <td><%= link_to '詳細画面', public_customer_path(customer.id), class:'btn btn-secondary' %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        <%= paginate customer %>
+    </tbody>
+</table>

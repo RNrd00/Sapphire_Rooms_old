@@ -1,12 +1,10 @@
 <div class="text-center">
-  <% unless admin_signed_in? %>
-    <% notifications = @notifications.where.not(visitor_id: current_customer.id) %>
-    <% if notifications.exists? %>
+    <% !admin_signed_in? ? notifications = @notifications.where.not(visitor_id: current_customer.id) : '' %>
+    <% if !admin_signed_in? && notifications.exists? %>
       <%= render notifications %>
       <%= paginate notifications %>
     <% else %>
      <p>通知はありません</p>
     <% end %>
-  <% end %>
   <h1><%= admin_signed_in? ? '管理者用通知画面です' : '' %></h1>
 </div>

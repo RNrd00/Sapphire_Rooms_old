@@ -306,6 +306,81 @@ describe '[STEP2] ユーザログイン後のテスト' do
     end
   end
 
+  describe 'フォロー一覧画面のテスト' do
+  before do
+    visit public_customer_followings_path(customer)
+  end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/customers/' + customer.id.to_s + '/followings'
+      end
+    end
+  end
+
+  describe 'フォロワーー一覧画面のテスト' do
+  before do
+    visit public_customer_followers_path(customer)
+  end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/customers/' + customer.id.to_s + '/followers'
+      end
+    end
+  end
+
+  describe 'ブックマーク画面のテスト' do
+  before do
+    visit likes_public_customer_path(customer)
+  end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/customers/' + customer.id.to_s + '/likes'
+      end
+    end
+  end
+
+  describe 'グループ一覧画面のテスト' do
+  before do
+    visit public_groups_path
+  end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/groups'
+      end
+    end
+  end
+
+  describe 'グループ作成画面のテスト' do
+  before do
+    visit new_public_group_path
+  end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/groups/new'
+      end
+      it 'グループ作成ボタンが表示される' do
+        expect(page).to have_button 'グループ作成'
+      end
+    end
+  end
+
+  describe '通知画面のテスト' do
+  before do
+    visit public_notifications_path
+  end
+
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/public/notifications'
+      end
+    end
+  end
+
     describe 'レビュー一覧画面のテスト' do
     before do
       visit public_ratings_path

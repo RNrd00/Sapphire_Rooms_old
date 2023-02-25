@@ -14,7 +14,9 @@
         <%= f.file_field :image, class: "form-control-file", accept: 'image/*' %>
     </div>
 
+  <% if !admin_signed_in? %>
     <div class="form-group">
         <%= f.submit 'グループ編集', class: 'btn btn-info' %>
     </div>
+  <% end %>
 <% end %>

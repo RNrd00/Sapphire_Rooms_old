@@ -1,6 +1,6 @@
 <h2>フォロワー</h2>
 <% if @customers.exists? %>
-    <%= render 'public/customers/index', customer: @customers %>
+    <%= render 'public/relationships/index', customer: @customers %>
 <h2>フォロワーのタイムライン</h2>
     <%= render 'public/books/index', books: @book %>
 <% else %>

@@ -1,7 +1,7 @@
 <% if !@model.nil? %>
     <% if @model == 'customer' %>
         <h3>ユーザーの検索結果 "<%= @content %>"</h3>
-        <%= render 'public/customers/index', customer: @records %>
+        <%= render 'public/relationships/index', customer: @records %>
     <% elsif @model == 'tag' %>
         <h3>タグの検索結果 "<%= @content %>"</h3>
         <%= render 'public/ratings/index', ratings: @records %>

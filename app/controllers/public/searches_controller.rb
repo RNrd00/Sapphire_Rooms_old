@@ -1,5 +1,5 @@
 class Public::SearchesController < ApplicationController
-  before_action :authenticate_customer!
+  before_action :move_to_sign_in, expect: %i[search]
 
   def search
     @model = params[:model]
@@ -16,5 +16,11 @@ class Public::SearchesController < ApplicationController
       @records = Tag.search_books_for(@content, @method)
       @records = Kaminari.paginate_array(@records).page(params[:page])
     end
+  end
+
+  def move_to_sign_in
+    return if customer_signed_in? || admin_signed_in?
+
+    redirect_to new_customer_session_path, notice: "ログインしてください。"
   end
 end

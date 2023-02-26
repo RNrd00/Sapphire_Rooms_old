@@ -26,6 +26,8 @@ SNSサイトは数多く存在しますが、特定の趣味に特化し尚且�
  - ワイヤーフレーム(https://app.diagrams.net/#G1B531z0yYoChg4muFL3iw2M7ByGM-Ab_e)
  - ER図(https://app.diagrams.net/#G1Tk6mQPNg5100vqZhIIgHWs2JooFVdENS)
  - テーブル定義書(https://docs.google.com/spreadsheets/d/1ZgllRUKSzoUGMEU36ELGias2gJgoxHBFmDx8S_0PhQ4/edit#gid=800172587)
+ - アプリケーション詳細設計書(https://docs.google.com/spreadsheets/d/1kPQ-BDT_DVvWtRCxwjJUu3kVNgUjfqNy/edit#gid=884957330)
+ - テスト仕様書(https://docs.google.com/spreadsheets/d/1wUqacVDPPxH9CGiKmISLTclBtcLOrNfd/edit#gid=2072448154)
 
 ## 開発環境
 - OS：Linux(CentOS)

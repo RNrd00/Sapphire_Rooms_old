@@ -22,12 +22,12 @@ SNSサイトは数多く存在しますが、特定の趣味に特化し尚且�
  - その話題を趣向が同じ、類似した方と共有したい時
 
 ## 設計書
- - 画面遷移図(https://app.diagrams.net/#G1ZxBK_o01Vg36R4cDaMzyZ0COxnT7XjVm)
- - ワイヤーフレーム(https://app.diagrams.net/#G1B531z0yYoChg4muFL3iw2M7ByGM-Ab_e)
- - ER図(https://app.diagrams.net/#G1Tk6mQPNg5100vqZhIIgHWs2JooFVdENS)
- - テーブル定義書(https://docs.google.com/spreadsheets/d/1ZgllRUKSzoUGMEU36ELGias2gJgoxHBFmDx8S_0PhQ4/edit#gid=800172587)
- - アプリケーション詳細設計書(https://docs.google.com/spreadsheets/d/1kPQ-BDT_DVvWtRCxwjJUu3kVNgUjfqNy/edit#gid=884957330)
- - テスト仕様書(https://docs.google.com/spreadsheets/d/1wUqacVDPPxH9CGiKmISLTclBtcLOrNfd/edit#gid=2072448154)
+ - 画面遷移図(https://app.diagrams.net/#G15FlgLkWy6hdBOMjbvwOaJX7A6nZzsBNZ)
+ - ワイヤーフレーム(https://app.diagrams.net/#G1HyNsLz1J9d9XHtvRckCWOkhqMIaaHUQF)
+ - ER図(https://app.diagrams.net/#G1JZNM4z3tUED0MNIoDjwWOgbu5YRPlho9)
+ - テーブル定義書(https://docs.google.com/spreadsheets/d/1Z_diy6eHxZYe5nuKDmHIe0ESCN2IrsxG/edit#gid=778089718)
+ - アプリケーション詳細設計書(https://docs.google.com/spreadsheets/d/1gNYUCB0fSM9EUIrb2kMj1HHvuYpVz57H/edit#gid=884957330)
+ - テスト仕様書(https://docs.google.com/spreadsheets/d/1w4gtY4kEpj8XUKxxlFepKNXjYa5aGX5w/edit#gid=2072448154)
 
 ## 開発環境
 - OS：Linux(CentOS)

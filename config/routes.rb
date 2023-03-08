@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :dictionaries, only: [:index] do
       collection do
         get :sns
+        get :room
       end
     end
   end

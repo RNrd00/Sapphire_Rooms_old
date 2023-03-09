@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       collection do
         get :sns
         get :room
+        get :user
       end
     end
   end

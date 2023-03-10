@@ -19,19 +19,72 @@
     </div>
     <div class="row">
         <div class="col-sm-9 mx-auto">
-            <iframe class="google-map" width="860" height="500" src="https://www.google.com/maps/embed?origin=mfe&pb=!1m2!2m1!1s35.68974794315689,139.70712829938347"></iframe>
+            <h2>GoogleMap</h2>
+
+            <input id="address" type="textbox" value="DMMWebcamp 新宿校">
+            <input type="button" value="検索" onclick="codeAddress()">
+            <div id="display">何かが表示される、、、、！</div>
+
+            <div id='map'></div>
+
             <style>
+            #map {
+              height: 600px;
+              width: 600px;
+            }
+
             @media screen and (max-width: 1300px) {
-                .google-map {
+                #map {
                   width: 100%;
                 }
             }
+
             @media screen and (max-width: 520px) {
-                .google-map {
+                #map {
                   width: 95%;
                 }
             }
             </style>
+
+            <script>
+            let map
+            let geocoder
+
+            const display = document.getElementById('display')
+
+            function initMap(){
+              geocoder = new google.maps.Geocoder()
+
+              map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 35.6895824, lng:139.7070532},
+                zoom: 12,
+              });
+
+              marker = new google.maps.Marker({
+                position:  {lat: 35.6895824, lng:139.7070532},
+                map: map
+              });
+            }
+
+            function codeAddress(){
+              let inputAddress = document.getElementById('address').value;
+
+              geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+                if (status == 'OK') {
+                  map.setCenter(results[0].geometry.location);
+                  var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location
+              });
+
+              display.textContent = "検索結果：" + results[ 0 ].geometry.location
+            } else {
+              alert('該当する結果がありませんでした：' + status);
+            }
+          });
+        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSip3xmW5TAqC0hwjkbhxjFaJCTvKx5tM&callback=initMap" async defer></script>
         </div>
     </div>
 </div>

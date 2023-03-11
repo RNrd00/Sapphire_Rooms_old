@@ -6,7 +6,7 @@ module Vision
   class << self
     def get_image_data(image_file)
 
-      api_url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['AIzaSyBSip3xmW5TAqC0hwjkbhxjFaJCTvKx5tM']}"
+      api_url = "https://vision.googleapis.com/v1/images:annotate?key=#{ENV['GOOGLE_API_KEY']}"
 
       dir_tree =  image_file.key.scan(/.{1,#{2}}/)
       base64_image = Base64.encode64(open("#{Rails.root}/public/uploads/#{dir_tree[0]}/#{dir_tree[1]}/#{image_file.key}").read)

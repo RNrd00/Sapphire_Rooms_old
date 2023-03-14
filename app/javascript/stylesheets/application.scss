@@ -1,2 +1,19 @@
-@import "~bootstrap/scss/bootstrap"; 
+@import "~bootstrap/scss/bootstrap";
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+#greeting-image,.search{
+　height: 600px;
+　width: 600px;
+}
+
+@media screen and (max-width: 1300px) {
+  #greeting-image,.search{
+   width: 100%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  #greeting-image,.search{
+   width: 95%;
+  }
+}

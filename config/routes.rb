@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         get :sns
         get :room
         get :user
+        get :chat
       end
     end
   end

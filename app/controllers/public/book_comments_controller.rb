@@ -5,7 +5,7 @@ class Public::BookCommentsController < ApplicationController
     @comment.book_id = book.id
     if @comment.save
     else
-      render 'error'
+      render "error"
     end
   end
 
